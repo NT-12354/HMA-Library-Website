@@ -199,29 +199,8 @@ section.s{padding-block:clamp(56px,8vw,110px)}
 .empty{grid-column:1/-1;text-align:center;padding:56px 16px;color:var(--muted);background:var(--surface);border-radius:20px;box-shadow:inset 0 0 0 1px var(--line)}
 .empty h3{color:var(--ink);font-size:24px;margin-bottom:8px}
 
-/* spaces */
 .band{background:var(--surface2)}
-.two{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:stretch}
-@media(max-width:900px){.two{grid-template-columns:1fr}}
-.photo{min-height:340px;border-radius:28px;box-shadow:var(--shadow)}
-.photo .cap{position:absolute;left:18px;bottom:18px;right:18px;color:#fff;z-index:2;font-size:14px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
-.photo .cap b{font:700 20px var(--f-display);display:block}
-.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(6,24,43,.75));z-index:1;pointer-events:none}
 .panel{background:var(--surface);border-radius:28px;padding:clamp(18px,3vw,32px);box-shadow:inset 0 0 0 1px var(--line)}
-.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 20px}
-.room{position:relative;text-align:left;border:1.5px solid var(--line);background:transparent;border-radius:16px;padding:14px;transition:.25s;display:block}
-.room:hover{border-color:var(--blue);transform:translateY(-2px)}
-.room[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,transparent);box-shadow:0 0 0 1px var(--blue)}
-.room b{display:block;font:700 16px var(--f-display)}
-.room small{color:var(--muted);font-size:13px}
-.lab{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
-.date{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:500 15px var(--f-body);max-width:100%}
-.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin:6px 0 20px}
-.slot{border:1.5px solid var(--line);background:transparent;border-radius:12px;padding:10px 4px;font:500 14px var(--f-mono);transition:.2s}
-.slot:hover:not(:disabled){border-color:var(--blue);transform:translateY(-2px)}
-.slot[aria-pressed="true"]{background:var(--blue);color:var(--on-blue);border-color:var(--blue)}
-.slot:disabled{opacity:.4;text-decoration:line-through;cursor:not-allowed;background:repeating-linear-gradient(45deg,transparent 0 6px,var(--surface2) 6px 8px)}
-.slot.mine{border-color:var(--brown);color:var(--brown);opacity:1;text-decoration:none}
 .note{color:var(--muted);font-size:14px}
 
 /* digital */
@@ -241,30 +220,6 @@ section.s{padding-block:clamp(56px,8vw,110px)}
 .ipad svg{flex:none;color:#E5A878}
 .ipad p{color:#b4c8da;font-size:15px}.ipad b{color:#fff}
 
-/* events */
-.evwrap{position:relative;border-radius:32px;overflow:hidden;color:#fff;min-height:420px;box-shadow:var(--shadow)}
-.evwrap .imgbox{position:absolute;inset:0}
-.evwrap::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(6,24,43,.92) 30%,rgba(6,24,43,.45))}
-.evin{position:relative;z-index:2;padding:clamp(24px,5vw,56px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px;align-items:center}
-@media(max-width:860px){.evin{grid-template-columns:1fr}}
-.evin h2{font-size:clamp(30px,4.5vw,52px);margin-top:12px}
-.evin .eyebrow{color:#E5A878}
-.evin p.lead{color:#c3d5e5;margin-top:14px;max-width:38ch}
-.car{position:relative;overflow:hidden;border-radius:24px;touch-action:pan-y}
-.track{display:flex;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.ev{flex:0 0 100%;min-width:0;padding:clamp(20px,3vw,32px);background:rgba(255,255,255,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);border-radius:24px;display:flex;flex-direction:column;gap:12px}
-.ev .when{font:500 13px var(--f-mono);color:#E5A878;letter-spacing:.06em;text-transform:uppercase}
-.ev h3{font-size:clamp(24px,3vw,32px)}
-.ev p{color:#d3e1ee}
-.ev .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
-.ev .btn.ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
-.ev .btn.ghost:hover{background:rgba(255,255,255,.15)}
-.ev .btn.ghost[aria-pressed="true"]{background:#E5A878;color:#2a1405;box-shadow:none}
-.cnav{display:flex;align-items:center;gap:10px;margin-top:16px}
-.cnav .iconbtn{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff;width:40px;height:40px}
-.dots{display:flex;gap:6px;margin-right:auto}
-.dots button{width:10px;height:10px;border-radius:5px;border:0;background:rgba(255,255,255,.35);padding:0;transition:.4s}
-.dots button[aria-current="true"]{width:30px;background:#E5A878}
 
 /* desk */
 .desk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:20px}
@@ -350,7 +305,7 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
     <span><b>Haile-Manas Library</b><small>Debre Birhan · Ethiopia</small></span>
   </a>
   <nav class="links" id="links" aria-label="Sections">
-    <a href="#catalog">Catalog</a><a href="#spaces">Study rooms</a><a href="#digital">Digital shelf</a><a href="#events">Events</a><a href="#ask">Ask a librarian</a>
+    <a href="#catalog">Catalog</a><a href="#digital">Digital shelf</a><a href="#ask">Ask a librarian</a>
   </nav>
   <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark theme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg></button>
   <button class="iconbtn" id="shelfBtn" aria-label="Open my shelf"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16.500 5.500l3.700-1 3.300 15-3.700 1z" transform="translate(-1 0)"/></svg><span class="badge" id="shelfBadge">0</span></button>
@@ -364,7 +319,7 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
     <div>
       <div class="eyebrow rise" style="--d:0"><span class="am">እንኳን ደህና መጡ</span> · Welcome to the library</div>
       <h1 class="rise" style="--d:1">Read widely.<br>Think <span class="hl">hard.</span></h1>
-      <p class="lede rise" style="--d:2">Search <span id="nTitles">7,000</span> books from the Haile-Manas Academy shelves, borrow one, reserve a study room and open free digital texts, from the dorm or the reading hall.</p>
+      <p class="lede rise" style="--d:2">Search <span id="nTitles">7,000</span> books from the Haile-Manas Academy shelves, borrow one and open free digital texts, from the dorm or the reading hall.</p>
       <div class="sbox rise" style="--d:3">
         <div class="sfield">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg>
@@ -405,36 +360,11 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
   <div class="more"><button class="btn ghost" id="more" hidden>Show more books</button></div>
 </div></section>
 
-<section class="s band" id="spaces"><div class="wrap two">
-  <div class="imgbox photo reveal" data-i="0" style="--g1:#0E5F9A;--g2:#0B1826"><span class="fb">Quiet study</span><div class="cap"><b>Four ways to work</b>Silent carrels, group pods, the reading hall and the iPad lab.</div></div>
-  <div class="panel reveal" style="--d:1">
-    <div class="eyebrow">Study rooms</div>
-    <h2 style="font-size:clamp(28px,4vw,44px);margin-top:12px">Reserve a seat</h2>
-    <div class="rooms" id="rooms" role="group" aria-label="Choose a space"></div>
-    <label class="lab" for="bdate">Date</label>
-    <input class="date" type="date" id="bdate">
-    <span class="lab" style="margin-top:18px">Time (one hour)</span>
-    <div class="slots" id="slots"></div>
-    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn" id="bookBtn" disabled>Reserve this slot</button><span class="note" id="bookNote">Pick a space and a time.</span></div>
-  </div>
-</div></section>
-
 <section class="s" id="digital"><div class="wrap">
   <div class="shead reveal"><div><div class="eyebrow">Digital shelf</div><h2>Open on every iPad</h2></div><p>Free, reliable sources for coursework, exam practice and reading for pleasure.</p></div>
   <div class="tabs reveal" id="tabs" role="tablist"><span class="ink" id="tabInk"></span></div>
   <div class="res" id="res" role="tabpanel"></div>
   <div class="ipad reveal"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.600" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2.500" width="16" height="19" rx="3"/><path d="M11 18.500h2"/></svg><p><b>Every Haile-Manas student receives an iPad on enrollment,</b> so these resources go wherever you study: the hall, the dorm or the dining room.</p></div>
-</div></section>
-
-<section class="s" id="events" style="padding-top:0"><div class="wrap">
-  <div class="evwrap reveal">
-    <div class="imgbox" data-i="2" style="--g1:#964B24;--g2:#050D16"><span class="fb">Events</span></div>
-    <div class="evin">
-      <div><div class="eyebrow">Events</div><h2>Clubs, clinics and late-night reading</h2><p class="lead">Tap “Remind me” on anything you plan to attend and it appears on your shelf.</p></div>
-      <div><div class="car" id="car"><div class="track" id="track"></div></div>
-        <div class="cnav"><div class="dots" id="dots"></div><button class="iconbtn" id="prev" aria-label="Previous event">←</button><button class="iconbtn" id="next" aria-label="Next event">→</button></div></div>
-    </div>
-  </div>
 </div></section>
 
 <section class="s band" id="ask"><div class="wrap">
@@ -464,9 +394,9 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
 
 <footer><div class="wrap">
   <div><img class="flogo" src="assets/logo.png" alt="Haile-Manas Academy, Ethiopia Education Initiatives" width="300" height="119"><div class="brand" style="color:#fff;margin-top:18px"><b style="font:800 20px var(--f-display)">Haile-Manas Academy Library</b></div><p style="margin-top:10px;max-width:42ch">A co-educational boarding school in Debre Birhan, Amhara region, Ethiopia, built around curiosity, critical thinking, creativity and community-mindedness.</p></div>
-  <div><h4>Jump to</h4><a href="#catalog">Catalog</a><a href="#spaces">Study rooms</a><a href="#digital">Digital shelf</a><a href="#events">Events</a></div>
+  <div><h4>Jump to</h4><a href="#catalog">Catalog</a><a href="#digital">Digital shelf</a><a href="#ask">Ask a librarian</a></div>
   <div><h4>School</h4><a href="https://www.hmacademy.org" target="_blank" rel="noopener">hmacademy.org</a><a href="https://openstax.org" target="_blank" rel="noopener">OpenStax</a></div>
-  <p class="fine"><span style="color:#fff;font-weight:600">© 2026 Haile-Manas Academy Library. All Rights Reserved.</span><br>The catalog is the school's LibraryThing export (7,000 titles). Hours and events are sample content. Loans, bookings and questions are saved in this browser only and are not sent to the school.</p>
+  <p class="fine"><span style="color:#fff;font-weight:600">© 2026 Haile-Manas Academy Library. All Rights Reserved.</span><br>The catalog is the school's LibraryThing export (7,000 titles). Opening hours are sample content. Loans, bookings and questions are saved in this browser only and are not sent to the school.</p>
 </div></footer>
 
 <button class="btn iconbtn" id="top" aria-label="Back to top" style="padding:0">↑</button>
@@ -480,8 +410,6 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
   <div class="dsec"><h3>On loan</h3><div id="dLoans"></div></div>
   <div class="dsec"><h3>Reservations</h3><div id="dHolds"></div></div>
   <div class="dsec"><h3>Wishlist</h3><div id="dWish"></div></div>
-  <div class="dsec"><h3>Room bookings</h3><div id="dBook"></div></div>
-  <div class="dsec"><h3>Event reminders</h3><div id="dRem"></div></div>
 </aside>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mcard" id="mcard"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -512,7 +440,7 @@ var nT=$("#nTitles");if(nT&&B.length)nT.textContent=nf(B.length);
 
 /* ---------- state ---------- */
 var KEY="hma-lib-v2",mem=null;
-function load(){try{var r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return mem||{card:null,loans:[],holds:[],wish:[],book:[],remind:[],returned:0}}
+function load(){try{var r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return mem||{card:null,loans:[],holds:[],wish:[],returned:0}}
 var S=load();
 function save(){mem=S;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function mine(id){return S.loans.some(function(l){return l.id===id})}
@@ -561,7 +489,7 @@ try{var th=localStorage.getItem("hma-theme");if(th)document.documentElement.data
 /* ---------- nav ---------- */
 $("#menuBtn").onclick=function(){var o=$("#links").classList.toggle("open");this.setAttribute("aria-expanded",o)};
 $$("#links a").forEach(function(a){a.onclick=function(){$("#links").classList.remove("open");$("#menuBtn").setAttribute("aria-expanded","false")}});
-var secs=["catalog","spaces","digital","events","ask"].map(function(id){return document.getElementById(id)});
+var secs=["catalog","digital","ask"].map(function(id){return document.getElementById(id)});
 function onScroll(){
   var y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
   $("#progress").style.transform="scaleX("+(h>0?y/h:0)+")";
@@ -687,28 +615,6 @@ sg.onclick=function(e){var b=e.target.closest("button[data-id]");if(b)pick(b.dat
 document.addEventListener("click",function(e){if(!e.target.closest(".sbox"))sg.classList.remove("open")});
 $("#try").onclick=function(e){var b=e.target.closest("button");if(!b)return;hq.value=b.textContent;go()};
 
-/* ---------- rooms & slots ---------- */
-var ROOMS=[{id:"hall",n:"Reading hall",s:"Open seating · 60 seats"},{id:"carrel",n:"Silent carrels",s:"Solo · no talking"},{id:"pod",n:"Group pods",s:"Up to 6 people"},{id:"ipad",n:"iPad lab",s:"Charging + screens"}];
-var BK={room:"hall",date:iso(Date.now()),h:null};
-$("#rooms").innerHTML=ROOMS.map(function(r){return '<button class="room" data-r="'+r.id+'" aria-pressed="'+(r.id===BK.room)+'"><b>'+r.n+'</b><small>'+r.s+'</small></button>'}).join("");
-$("#rooms").onclick=function(e){var r=e.target.closest(".room");if(!r)return;BK.room=r.dataset.r;BK.h=null;slots()};
-var bd=$("#bdate");bd.min=iso(Date.now());bd.value=BK.date;bd.max=iso(Date.now()+30*DAY);
-bd.onchange=function(){BK.date=this.value||BK.date;BK.h=null;slots()};
-function taken(room,date,h){var n=0,s=room+date;for(var i=0;i<s.length;i++)n=(n*31+s.charCodeAt(i))%9973;return (n+h*7)%5===0}
-function isMine(room,date,h){return S.book.some(function(b){return b.room===room&&b.date===date&&b.h===h})}
-function slots(){
-  $$("#rooms .room").forEach(function(r){r.setAttribute("aria-pressed",r.dataset.r===BK.room)});
-  var d=new Date(BK.date+"T00:00:00"),dow=d.getDay(),sat=dow===6,sun=dow===0,hrs=[];
-  if(!sun){for(var h=(sat?9:8);h<(sat?16:20);h++)hrs.push(h)}
-  var today=BK.date===iso(Date.now()),nowH=new Date().getHours();
-  $("#slots").innerHTML=hrs.length?hrs.map(function(h){var m=isMine(BK.room,BK.date,h),tk=m||taken(BK.room,BK.date,h)||(today&&h<=nowH);var label=String(h).padStart(2,"0")+":00";return '<button class="slot'+(m?" mine":"")+'" data-h="'+h+'" aria-pressed="'+(BK.h===h)+'"'+(tk&&!m?" disabled":"")+(m?' title="Your booking"':"")+'>'+label+(m?" ✓":"")+'</button>'}).join(""):'<p class="note" style="grid-column:1/-1">The library is closed on Sundays.</p>';
-  var b=$("#bookBtn");b.disabled=BK.h===null;$("#bookNote").textContent=BK.h===null?"Pick a space and a time.":ROOMS.filter(function(r){return r.id===BK.room})[0].n+" · "+fmt(d)+" · "+String(BK.h).padStart(2,"0")+":00";
-}
-$("#slots").onclick=function(e){var s=e.target.closest(".slot");if(!s||s.disabled||s.classList.contains("mine"))return;BK.h=+s.dataset.h;slots()};
-$("#bookBtn").onclick=function(){
-  if(!S.card){openDrawer();toast("Create your library card first");return}
-  if(BK.h===null)return;S.book.push({room:BK.room,date:BK.date,h:BK.h});save();BK.h=null;slots();drawer();badge();toast("Room reserved. See it on My shelf")};
-
 /* ---------- digital tabs ---------- */
 var DIG={"Textbooks":[["OpenStax","Free peer-reviewed textbooks in math, science and more.","openstax.org","https://openstax.org"],["Khan Academy","Video lessons and exercises from algebra to biology.","khanacademy.org","https://www.khanacademy.org"],["MIT OpenCourseWare","University course notes and problem sets, free.","ocw.mit.edu","https://ocw.mit.edu"]],
 "SAT & exams":[["Official SAT Practice","Free full-length practice with Khan Academy and College Board.","khanacademy.org/sat","https://www.khanacademy.org/test-prep/sat"],["College Board","Test dates, registration and score information.","collegeboard.org","https://www.collegeboard.org"],["Khan Academy Math","Targeted practice for the math section.","khanacademy.org/math","https://www.khanacademy.org/math"]],
@@ -721,27 +627,6 @@ function tab(){
 $("#tabs").onclick=function(e){var t=e.target.closest(".tab");if(!t)return;curTab=t.dataset.t;tab()};
 addEventListener("resize",tab);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tab);
-
-/* ---------- events carousel ---------- */
-function nextDow(dow,wk){var d=new Date();d.setHours(12,0,0,0);var diff=(dow-d.getDay()+7)%7;if(diff===0)diff=7;return new Date(+d+(diff+(wk||0)*7)*DAY)}
-var EV=[{id:"e1",t:"Book club: The Shadow King",d:nextDow(4),tm:"18:30",p:"Reading hall",x:"Discuss Maaza Mengiste's novel of the 1935 war. Copies are on the shelf; start with the first third."},
-{id:"e2",t:"SAT reading clinic",d:nextDow(2),tm:"17:00",p:"Group pods",x:"Timed passages, answer reasoning and the habits that raise scores. Bring your iPad."},
-{id:"e3",t:"Amharic poetry evening",d:nextDow(5),tm:"19:00",p:"Reading hall",x:"Read your own poems or a favorite by an Ethiopian poet. Listeners welcome."},
-{id:"e4",t:"Science fiction night",d:nextDow(6),tm:"15:00",p:"iPad lab",x:"Short stories, big ideas and a debate on what the next fifty years will look like."},
-{id:"e5",t:"Debate and reading circle",d:nextDow(3,1),tm:"17:30",p:"Group pods",x:"Pick a nonfiction chapter, argue both sides, then vote on the next one."}];
-var ci=0,timer,paused=false;
-$("#track").innerHTML=EV.map(function(e){return '<article class="ev" aria-roledescription="slide"><div class="when">'+fmt(e.d)+' · '+e.tm+' · '+e.p+'</div><h3>'+esc(e.t)+'</h3><p>'+esc(e.x)+'</p><div class="row"><button class="btn ghost sm" data-rem="'+e.id+'" aria-pressed="false">Remind me</button></div></article>'}).join("");
-$("#dots").innerHTML=EV.map(function(e,i){return '<button aria-label="Event '+(i+1)+'" data-i="'+i+'"></button>'}).join("");
-function slide(i){ci=(i+EV.length)%EV.length;$("#track").style.transform="translateX(-"+ci*100+"%)";$$("#dots button").forEach(function(b,k){b.setAttribute("aria-current",k===ci)})}
-function remStates(){$$("[data-rem]").forEach(function(b){var on=S.remind.indexOf(b.dataset.rem)>-1;b.setAttribute("aria-pressed",on);b.textContent=on?"Reminder set ✓":"Remind me"})}
-$("#prev").onclick=function(){slide(ci-1)};$("#next").onclick=function(){slide(ci+1)};
-$("#dots").onclick=function(e){var b=e.target.closest("button");if(b)slide(+b.dataset.i)};
-$("#track").onclick=function(e){var b=e.target.closest("[data-rem]");if(!b)return;var i=S.remind.indexOf(b.dataset.rem);if(i>-1){S.remind.splice(i,1);toast("Reminder removed")}else{S.remind.push(b.dataset.rem);toast("Reminder set. Find it on My shelf")}save();remStates();drawer()};
-var car=$("#car");car.addEventListener("pointerenter",function(){paused=true});car.addEventListener("pointerleave",function(){paused=false});car.addEventListener("focusin",function(){paused=true});car.addEventListener("focusout",function(){paused=false});
-var sx=null;car.addEventListener("pointerdown",function(e){sx=e.clientX});car.addEventListener("pointerup",function(e){if(sx!==null&&Math.abs(e.clientX-sx)>50)slide(ci+(e.clientX<sx?1:-1));sx=null});
-car.setAttribute("tabindex","0");car.addEventListener("keydown",function(e){if(e.key==="ArrowRight")slide(ci+1);if(e.key==="ArrowLeft")slide(ci-1)});
-if(!RM)setInterval(function(){if(!paused&&!document.hidden)slide(ci+1)},6500);
-slide(0);remStates();
 
 /* ---------- ring ---------- */
 var GOAL=5,C=2*Math.PI*62;
@@ -761,21 +646,17 @@ $("#shelfBtn").onclick=openDrawer;$("#dClose").onclick=closeDrawer;
 $("#scrim").onclick=function(){closeModal();closeDrawer()};
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){if($("#modal").classList.contains("on"))closeModal();else if($("#drawer").classList.contains("on"))closeDrawer()}});
 function item(b,right){return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>'+right+'</small></div></div>'}
-function badge(){var n=S.loans.length+S.holds.length+S.book.length;var e=$("#shelfBadge");e.textContent=n;e.classList.toggle("on",n>0)}
+function badge(){var n=S.loans.length+S.holds.length;var e=$("#shelfBadge");e.textContent=n;e.classList.toggle("on",n>0)}
 function drawer(){
   $("#cname").value=$("#cname").value||(S.card?S.card.name:"");if(S.card){$("#cgrade").value=S.card.grade;$("#cno").value=S.card.no;$("#cardSave").textContent="Update card"}
   $("#dLoans").innerHTML=S.loans.length?S.loans.map(function(l){var b=BYID[l.id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>Due '+fmt(l.due)+(l.renewed?" · renewed":"")+'</small></div><div class="acts" style="flex:none"><button class="btn ghost sm" data-renew="'+l.id+'"'+(l.renewed?" disabled":"")+'>Renew</button><button class="btn sm" data-return="'+l.id+'">Return</button></div></div>'}).join(""):'<p class="none">Nothing borrowed yet.</p>';
   $("#dHolds").innerHTML=S.holds.length?S.holds.map(function(id){var b=BYID[id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>Waiting for a copy</small></div><button class="btn ghost sm" data-unhold="'+id+'">Cancel</button></div>'}).join(""):'<p class="none">No reservations.</p>';
   $("#dWish").innerHTML=S.wish.length?S.wish.map(function(id){var b=BYID[id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>'+esc(b.author)+'</small></div><button class="btn ghost sm" data-view="'+id+'">View</button></div>'}).join(""):'<p class="none">Tap the heart on any book to save it.</p>';
-  $("#dBook").innerHTML=S.book.length?S.book.map(function(k,i){var r=ROOMS.filter(function(x){return x.id===k.room})[0];return '<div class="li"><div><b>'+r.n+'</b><small>'+fmt(k.date+"T12:00:00")+' · '+String(k.h).padStart(2,"0")+':00</small></div><button class="btn ghost sm" data-cancelbk="'+i+'">Cancel</button></div>'}).join(""):'<p class="none">No room reserved.</p>';
-  $("#dRem").innerHTML=S.remind.length?S.remind.map(function(id){var e=EV.filter(function(x){return x.id===id})[0];return '<div class="li"><div><b>'+esc(e.t)+'</b><small>'+fmt(e.d)+' · '+e.tm+'</small></div><button class="btn ghost sm" data-unrem="'+id+'">Remove</button></div>'}).join(""):'<p class="none">No reminders set.</p>';
   badge();ring();
 }
 $("#drawer").onclick=function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
   if(d.return)giveBack(d.return);else if(d.renew){var l=S.loans.filter(function(x){return x.id===d.renew})[0];if(l&&!l.renewed){l.due+=7*DAY;l.renewed=true;save();drawer();toast("Renewed until "+fmt(l.due))}}
-  else if(d.unhold)unhold(d.unhold);else if(d.view){closeDrawer();setTimeout(function(){openBook(d.view)},350)}
-  else if(d.cancelbk!==undefined){S.book.splice(+d.cancelbk,1);save();drawer();slots();toast("Booking cancelled")}
-  else if(d.unrem){S.remind=S.remind.filter(function(x){return x!==d.unrem});save();remStates();drawer();toast("Reminder removed")}};
+  else if(d.unhold)unhold(d.unhold);else if(d.view){closeDrawer();setTimeout(function(){openBook(d.view)},350)}};
 $("#cardForm").onsubmit=function(e){e.preventDefault();var n=$("#cname").value.trim();$("#cn").classList.toggle("bad",!n);if(!n)return;
   var no=S.card?S.card.no:"HMA-"+String(new Date().getFullYear())+"-"+String(Math.floor(100+Math.random()*900));S.card={name:n,grade:$("#cgrade").value,no:no};save();drawer();toast("Card saved: "+no)};
 
@@ -791,7 +672,7 @@ $("#cardForm").onsubmit=function(e){e.preventDefault();var n=$("#cname").value.t
 var sObs=new IntersectionObserver(function(en){if(en[0].isIntersecting){countUp();sObs.disconnect()}},{threshold:.3});sObs.observe($("#stats"));
 
 /* init */
-render();slots();tab();drawer();
+render();tab();drawer();
 })();
 </script>
 

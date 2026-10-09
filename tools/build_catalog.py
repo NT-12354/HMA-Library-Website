@@ -99,7 +99,6 @@ CREATE TABLE book_tags(book_id INTEGER NOT NULL REFERENCES books(book_id),tag_id
 CREATE TABLE members(member_id INTEGER PRIMARY KEY,name TEXT NOT NULL,grade INTEGER,card_no TEXT UNIQUE);
 CREATE TABLE loans(loan_id INTEGER PRIMARY KEY,book_id INTEGER NOT NULL REFERENCES books(book_id),member_id INTEGER NOT NULL REFERENCES members(member_id),borrowed_on TEXT NOT NULL,due_on TEXT NOT NULL,returned_on TEXT,renewed INTEGER NOT NULL DEFAULT 0);
 CREATE TABLE holds(hold_id INTEGER PRIMARY KEY,book_id INTEGER NOT NULL REFERENCES books(book_id),member_id INTEGER NOT NULL REFERENCES members(member_id),placed_on TEXT NOT NULL);
-CREATE TABLE room_bookings(booking_id INTEGER PRIMARY KEY,room TEXT NOT NULL,day TEXT NOT NULL,hour INTEGER NOT NULL,member_id INTEGER REFERENCES members(member_id),UNIQUE(room,day,hour));
 CREATE TABLE meta(key TEXT PRIMARY KEY,value TEXT);
 ''')
 cur.executemany('INSERT INTO people VALUES (?,?)',[(i,n) for n,i in people.items()])
