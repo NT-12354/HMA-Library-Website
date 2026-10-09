@@ -179,6 +179,10 @@ section.s{padding-block:clamp(56px,8vw,110px)}
 .book:hover .cover{transform:perspective(700px) rotateY(-14deg)}
 .cover::before{content:"";position:absolute;right:-30%;top:-10%;width:90%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,hsl(var(--h) 90% 70%/.55),transparent 65%)}
 .cover::after{content:"";position:absolute;left:22px;right:16px;top:46px;height:2px;background:hsl(var(--h) 90% 70%)}
+.cover .cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:2;opacity:0;transition:opacity .5s;background:#fff}
+.cover .cv.ok{opacity:1}
+.cover.has-img::before,.cover.has-img::after{display:none}
+.cover.has-img small,.cover.has-img b{visibility:hidden}
 .cover b{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;position:relative;font:700 clamp(17px,2vw,21px)/1.08 var(--f-display);letter-spacing:-.01em}
 .cover small{padding-right:34px;position:relative;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.9}
 .book h3{font-size:17px;line-height:1.2;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
@@ -432,9 +436,15 @@ var B=D.books.map(function(r){
   var subs=r[16].map(function(i){return D.subjects[i]});
   var b={id:id,title:r[1],author:au,role:r[3],author2:r[4],role2:r[5],pub:r[6],date:r[7],media:r[8],pages:r[9],lang:r[10],shelves:sh,cat:main,lc:r[12],dewey:r[13],dwText:r[14]>-1?D.dewey_words[r[14]]:"",isbn:r[15],subs:subs,summary:r[17],copies:r[18],due:r[19],out:r[20],added:r[21],tags:r[22],call:r[23],source:r[24],
     ak:au?(au.split(" ").slice(-1)[0]+" "+au).toLowerCase():"~",tk:r[1].toLowerCase(),year:parseInt(r[7],10)||0,h:(SHELF_HUE[main]||210)+(parseInt(id.slice(-2),10)%14)};
+  b.isbns=(r[26]||"").split(" ").filter(function(x,i,a){return x&&a.indexOf(x)===i});
+  if(b.isbn&&b.isbns.indexOf(b.isbn)<0)b.isbns.unshift(b.isbn);
   b.s=(r[1]+" "+au+" "+r[4]+" "+r[15]+" "+(r[26]||"")+" "+r[23]+" "+r[12]+" "+r[13]+" "+r[6]+" "+sh.join(" ")+" "+r[22].join(" ")+" "+subs.join(" ")).toLowerCase();
   return b});
 var BYID={};B.forEach(function(b){BYID[b.id]=b});
+/* Real covers come from Open Library by ISBN, loaded in the visitor's browser. If none exists the generated cover stays. */
+function coverImg(b,size){return b.isbns.length?'<img class="cv" data-id="'+b.id+'" data-i="0" data-s="'+size+'" src="https://covers.openlibrary.org/b/isbn/'+b.isbns[0]+'-'+size+'.jpg?default=false" alt="Cover of '+esc(b.title)+'" loading="lazy" decoding="async" referrerpolicy="no-referrer">':""}
+document.addEventListener("error",function(e){var im=e.target;if(!im||im.tagName!=="IMG"||!im.classList.contains("cv"))return;var b=BYID[im.dataset.id],i=+im.dataset.i+1;if(b&&b.isbns[i]){im.dataset.i=i;im.src="https://covers.openlibrary.org/b/isbn/"+b.isbns[i]+"-"+im.dataset.s+".jpg?default=false"}else im.remove()},true);
+document.addEventListener("load",function(e){var im=e.target;if(!im||im.tagName!=="IMG"||!im.classList.contains("cv"))return;if(im.naturalWidth<=2){im.dispatchEvent(new Event("error"));return}var c=im.closest(".cover");im.classList.add("ok");if(c)c.classList.add("has-img")},true);
 var nf=function(n){return n.toLocaleString("en-US")};
 var nT=$("#nTitles");if(nT&&B.length)nT.textContent=nf(B.length);
 
@@ -547,7 +557,7 @@ function list(){
   return r}
 function cardHTML(b,i){var s=status(b),w=S.wish.indexOf(b.id)>-1;
   return '<article class="book" style="--i:'+Math.min(i,14)+'"><button class="heart" data-heart="'+b.id+'" aria-pressed="'+w+'" aria-label="'+(w?"Remove from":"Add to")+' wishlist: '+esc(b.title)+'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-4.500-9.500-9A5.500 5.500 0 0 1 12 6.500 5.500 5.500 0 0 1 21.500 12C19 16.500 12 21 12 21Z"/></svg></button>'+
-  '<button class="cover" style="--h:'+b.h+'" data-open="'+b.id+'" aria-label="Details: '+esc(b.title)+'"><small>'+esc(b.cat)+(b.year?' · '+b.year:'')+'</small><b>'+esc(b.title)+'</b></button>'+
+  '<button class="cover" style="--h:'+b.h+'" data-open="'+b.id+'" aria-label="Details: '+esc(b.title)+'">'+coverImg(b,"M")+'<small>'+esc(b.cat)+(b.year?' · '+b.year:'')+'</small><b>'+esc(b.title)+'</b></button>'+
   '<div><h3>'+esc(b.title)+'</h3><div class="au">'+esc(b.author||"Author not listed")+'</div></div><div class="meta"><span class="call">'+esc(b.call||"No call no.")+'</span><span class="pill '+s[0]+'">'+s[1]+'</span></div></article>'}
 function paint(){
   var r=cur2.slice(0,shown);
@@ -583,7 +593,7 @@ function openBook(id){
   var avl=m?'Borrowed by you, due '+fmt(S.loans.filter(function(l){return l.id===id})[0].due):b.out?'Checked out'+(b.due?', due '+fmtD(b.due):''):avail(b)+' of '+b.copies+' on the shelf';
   var cls=[b.dewey&&'Dewey '+esc(b.dewey),b.lc&&'LC '+esc(b.lc)].filter(Boolean).join(' · ')+(b.dwText?'<span class="sub">'+esc(b.dwText)+'</span>':'');
   var subs=b.subs.slice(0,8).map(esc).join('; ')+(b.subs.length>8?' (+'+(b.subs.length-8)+' more)':'');
-  $("#mcard").innerHTML='<button class="iconbtn mclose" data-close aria-label="Close details">✕</button><button class="cover" style="--h:'+b.h+';cursor:default" tabindex="-1"><small>'+esc(b.cat)+(b.year?' · '+b.year:'')+'</small><b>'+esc(b.title)+'</b></button>'+
+  $("#mcard").innerHTML='<button class="iconbtn mclose" data-close aria-label="Close details">✕</button><button class="cover" style="--h:'+b.h+';cursor:default" tabindex="-1">'+coverImg(b,"L")+'<small>'+esc(b.cat)+(b.year?' · '+b.year:'')+'</small><b>'+esc(b.title)+'</b></button>'+
   '<div style="min-width:0"><span class="pill '+s[0]+'">'+s[1]+'</span><h2 id="mTitle" style="overflow-wrap:anywhere">'+esc(b.title)+'</h2><div class="au" style="color:var(--muted)">'+who+'</div>'+(b.summary?'<p style="margin-top:14px">'+esc(b.summary)+'</p>':'')+'<dl>'+
    row('Availability',avl)+row('Call no.','<span style="font-family:var(--f-mono)">'+esc(b.call)+'</span>')+row('Format',esc(b.media))+row('Published',esc(b.pub))+row('Pages',b.pages?String(b.pages):'')+row('Language',esc(b.lang))+row('ISBN','<span style="font-family:var(--f-mono)">'+esc(b.isbn)+'</span>')+row('Class',cls)+row('Shelves',esc(b.shelves.join(', ')||UNSORTED))+row('Subjects',subs)+row('Tags',esc(b.tags.join(', ')))+row('Added',b.added?fmtD(b.added):'')+
    '</dl><div style="display:flex;gap:10px;flex-wrap:wrap">'+btn+'<button class="btn ghost" data-heart2="'+id+'">'+(S.wish.indexOf(id)>-1?"Remove from wishlist":"Add to wishlist")+'</button></div></div>';

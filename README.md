@@ -24,4 +24,5 @@ SELECT title_clean, lending_end FROM books WHERE is_checked_out = 1 ORDER BY len
 ## Notes
 - Borrower names in the export are not copied. The `lending_patron` column exists but is empty, so the public repo holds no student names. Which books are checked out, and their due dates, are kept.
 - A static website cannot write to a database. Loans and reservations are saved in the visitor's own browser. The `loans` and `holds` tables show how a server version would store them.
+- Book covers are loaded in the visitor's browser from Open Library (covers.openlibrary.org) using each book's ISBN. When Open Library has no cover for a book, the site shows a generated cover with the title. Covers need an internet connection.
 - Opening hours are sample content.
