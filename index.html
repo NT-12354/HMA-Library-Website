@@ -128,7 +128,7 @@ header.nav.stuck{border-color:var(--line);box-shadow:0 8px 24px -16px rgba(0,0,0
 .live-card{position:absolute;right:-1%;top:0;z-index:3;background:var(--surface);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;animation:rise 1s .6s both}
 .live-card b{display:block;font:700 15px var(--f-display)}
 .live-card small{color:var(--muted);font-size:12px}
-@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.collage{max-width:420px}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.collage{max-width:420px}}
 
 /* spine shelf */
 .shelf{background:var(--night);color:var(--on-night);padding-block:36px 0;position:relative;overflow:hidden}
@@ -158,7 +158,7 @@ section.s{padding-block:clamp(56px,8vw,110px)}
 .tools input,.tools select{width:100%;min-width:0;border:0;background:transparent;color:var(--ink);font:500 15px var(--f-body);padding:13px 0;outline:0}
 .tools select option{background:var(--surface);color:var(--ink)}
 .sw{display:flex;align-items:center;gap:10px;font-weight:500;font-size:15px;cursor:pointer;white-space:nowrap;padding:0 4px}
-.sw input{position:absolute;opacity:0}
+.sw{position:relative}.sw input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0}
 .sw i{width:44px;height:26px;border-radius:13px;background:var(--surface2);box-shadow:inset 0 0 0 1.5px var(--line);position:relative;transition:.3s}
 .sw i::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:.3s cubic-bezier(.3,1.5,.5,1)}
 .sw input:checked+i{background:var(--blue)}
@@ -188,6 +188,65 @@ section.s{padding-block:clamp(56px,8vw,110px)}
 .book h3{font-size:17px;line-height:1.2;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .book .au{color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:1.5em}
 .book>div{min-width:0}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.authslot{position:relative;display:flex;align-items:center}
+.avatar{width:42px;height:42px;border-radius:50%;border:0;background:var(--blue);color:var(--on-blue);font:700 17px var(--f-display);display:grid;place-items:center;overflow:hidden;padding:0;transition:transform .25s,box-shadow .25s}
+.avatar:hover{transform:scale(1.06);box-shadow:0 8px 18px -8px var(--blue)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar.big{width:48px;height:48px;flex:none}
+.umenu{position:absolute;right:0;top:calc(100% + 12px);min-width:250px;background:var(--surface);border-radius:18px;box-shadow:var(--shadow),inset 0 0 0 1px var(--line);padding:8px;z-index:60;display:grid;gap:2px;animation:rise .25s both}
+.uinfo{display:grid;gap:2px;padding:10px 12px 12px;border-bottom:1px solid var(--line);margin-bottom:6px;min-width:0}
+.uinfo small{color:var(--muted);overflow-wrap:anywhere}.uinfo .pill{justify-self:start;margin-top:6px}
+.umenu button{text-align:left;border:0;background:none;padding:10px 12px;border-radius:10px;font-weight:500}
+.umenu button:hover{background:var(--surface2)}
+.mcard.auth{grid-template-columns:1fr;width:min(460px,100%);gap:16px}
+.aintro{display:grid;gap:10px;padding-right:36px}.aintro h2{font-size:30px;margin:0}.aintro p{color:var(--muted)}
+.mark2{border-radius:12px;background:#fff;padding:3px;box-shadow:inset 0 0 0 1px var(--line)}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:13px 18px;border-radius:999px;font-weight:600;font-size:16px;transition:.25s}
+.gbtn:hover{border-color:var(--blue);transform:translateY(-1px);box-shadow:var(--shadow)}
+.gbtn[disabled]{opacity:.6;pointer-events:none}
+.amsg{margin:0;background:color-mix(in srgb,var(--blue) 12%,transparent);padding:10px 14px;border-radius:12px}
+.aerr{margin:0;color:var(--clay);background:color-mix(in srgb,var(--clay) 12%,transparent);padding:10px 14px;border-radius:12px}
+.demo{border:1.5px dashed var(--brown);border-radius:16px;padding:14px 16px;display:grid;gap:10px}.demo b{color:var(--brown)}.demo p{margin:0;color:var(--muted);font-size:14px}
+.drow{display:flex;gap:10px;flex-wrap:wrap}
+.acct{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.acct>div{min-width:0;flex:1}.acct small{display:block;color:var(--muted);overflow-wrap:anywhere}
+.li .acts{display:flex;gap:6px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+.li small{overflow-wrap:anywhere}
+.qli .reply{display:block;margin-top:8px;border-left:3px solid var(--blue);padding-left:10px;color:var(--ink);white-space:pre-wrap}
+.qli .wait{display:block;margin-top:6px;color:var(--brown)}
+.pill.dim{--st:var(--muted)}
+.sheet{position:fixed;inset:0;z-index:92;background:var(--bg);overflow-y:auto;transform:translateY(102%);visibility:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),visibility 0s .5s;padding-top:env(safe-area-inset-top,0px)}
+.sheet.on{transform:none;visibility:visible;transition-delay:0s}
+.sheetbar{position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.sheetbar .wrap{display:flex;gap:14px 16px;align-items:center;flex-wrap:wrap;padding-block:14px}
+.sheetbar h2{font-size:28px;margin-top:4px}
+.atabs{display:flex;gap:4px;background:var(--surface2);padding:4px;border-radius:999px;max-width:100%;overflow-x:auto}
+.atabs button{border:0;background:transparent;padding:8px 16px;border-radius:999px;font-weight:600;font-size:14px;white-space:nowrap;transition:.25s}
+.atabs button[aria-selected="true"]{background:var(--blue);color:var(--on-blue)}
+.atabs i{font:500 11px var(--f-mono);font-style:normal;margin-left:8px;opacity:.85}
+.sheetbody{padding-block:24px 72px}
+.demo-note{border:1.5px dashed var(--brown);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:14px;margin:0 0 18px}
+.atools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.atools input,.atools select{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 14px;font:500 15px var(--f-body);min-width:0}
+.atools input[type=search]{flex:1;min-width:200px;max-width:420px}
+.tblwrap{overflow-x:auto;background:var(--surface);border-radius:20px;box-shadow:inset 0 0 0 1px var(--line)}
+.tbl{width:100%;border-collapse:collapse;min-width:780px;font-size:14px}
+.tbl th{text-align:left;font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl small{display:block;color:var(--muted)}
+.tbl .acts{display:flex;gap:6px;flex-wrap:wrap}
+.arow{display:flex;gap:14px;align-items:center;padding:12px 14px;background:var(--surface);border-radius:16px;box-shadow:inset 0 0 0 1px var(--line);margin-bottom:8px;flex-wrap:wrap}
+.arow .grow{flex:1;min-width:200px}.arow small{display:block;color:var(--muted)}
+.qcard{background:var(--surface);border-radius:20px;padding:18px;box-shadow:inset 0 0 0 1px var(--line);margin-bottom:12px;display:grid;gap:10px}
+.qcard header{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.qcard .muted{color:var(--muted)}.qcard .msg{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.qcard .reply{border-left:3px solid var(--blue);padding-left:12px;white-space:pre-wrap}.qcard .reply small{display:block;color:var(--muted)}
+.rform{display:grid;gap:8px}.rform textarea{width:100%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:500 15px var(--f-body);resize:vertical}
+.bform{background:var(--surface);border-radius:24px;padding:clamp(18px,3vw,28px);box-shadow:inset 0 0 0 1px var(--line);max-width:760px}
+.chk{display:flex;gap:10px;align-items:center;font-weight:500}
+@media(max-width:560px){.brand span{display:none}.nav .wrap{gap:10px}}
 .chip i{font:500 12px var(--f-mono);font-style:normal;opacity:.65;margin-left:8px}
 .more{display:flex;justify-content:center;margin-top:28px}
 .mcard .sub{color:var(--muted);font-size:13px;display:block;margin-top:2px}
@@ -313,6 +372,7 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
   </nav>
   <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark theme"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg></button>
   <button class="iconbtn" id="shelfBtn" aria-label="Open my shelf"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16.500 5.500l3.700-1 3.300 15-3.700 1z" transform="translate(-1 0)"/></svg><span class="badge" id="shelfBadge">0</span></button>
+  <div class="authslot" id="authSlot"></div>
   <button class="iconbtn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>
 
@@ -384,11 +444,11 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
       <h3 style="font-size:28px;margin-bottom:16px">Ask a librarian</h3>
       <form class="form" id="askForm" novalidate>
         <div class="r2">
-          <div class="fld" id="fn"><label for="aname">Your name</label><input id="aname" autocomplete="name"><div class="err">Enter your name.</div></div>
+          <div class="fld" id="fn"><label for="aname">Your name</label><input id="aname" autocomplete="name" placeholder="Sign in to fill this in"></div>
           <div class="fld"><label for="atopic">Topic</label><select id="atopic"><option>Finding a book</option><option>SAT or exam prep</option><option>Research help</option><option>Request a title</option><option>Something else</option></select></div>
         </div>
         <div class="fld" id="fm"><label for="amsg">Your question</label><textarea id="amsg"></textarea><div class="err">Write at least 10 characters.</div></div>
-        <div><button class="btn" type="submit">Send question</button></div>
+        <div><button class="btn" type="submit" id="askBtn">Send question</button> <span class="note" id="askNote"></span></div>
         <div class="ok-msg" id="askOk" role="status"></div>
       </form>
     </div>
@@ -400,24 +460,33 @@ footer .fine{grid-column:1/-1;border-top:1px solid #1B4A73;padding-top:20px;font
   <div><img class="flogo" src="assets/logo.png" alt="Haile-Manas Academy, Ethiopia Education Initiatives" width="300" height="119"><div class="brand" style="color:#fff;margin-top:18px"><b style="font:800 20px var(--f-display)">Haile-Manas Academy Library</b></div><p style="margin-top:10px;max-width:42ch">A co-educational boarding school in Debre Birhan, Amhara region, Ethiopia, built around curiosity, critical thinking, creativity and community-mindedness.</p></div>
   <div><h4>Jump to</h4><a href="#catalog">Catalog</a><a href="#digital">Digital shelf</a><a href="#ask">Ask a librarian</a></div>
   <div><h4>School</h4><a href="https://www.hmacademy.org" target="_blank" rel="noopener">hmacademy.org</a><a href="https://openstax.org" target="_blank" rel="noopener">OpenStax</a></div>
-  <p class="fine"><span style="color:#fff;font-weight:600">© 2026 Haile-Manas Academy Library. All Rights Reserved.</span><br>The catalog is the school's LibraryThing export (7,000 titles). Opening hours are sample content. Loans, bookings and questions are saved in this browser only and are not sent to the school.</p>
+  <p class="fine"><span style="color:#fff;font-weight:600">© 2026 Haile-Manas Academy Library. All Rights Reserved.</span><br>The catalog is the school's LibraryThing export (7,000 titles). Opening hours are sample content. Borrowing and questions need a school Google account.</p>
 </div></footer>
 
 <button class="btn iconbtn" id="top" aria-label="Back to top" style="padding:0">↑</button>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="My shelf" aria-hidden="true">
   <header><h2>My shelf</h2><button class="iconbtn" id="dClose" aria-label="Close my shelf">✕</button></header>
-  <div class="dsec" style="margin-top:0"><h3>Library card</h3><form class="form" id="cardForm" novalidate>
-    <div class="fld" id="cn"><label for="cname">Name</label><input id="cname" autocomplete="name"><div class="err">Enter your name.</div></div>
-    <div class="r2"><div class="fld"><label for="cgrade">Grade</label><select id="cgrade"><option>9</option><option>10</option><option>11</option><option>12</option></select></div><div class="fld"><label>Card no.</label><input id="cno" readonly value="Issued on save"></div></div>
-    <div><button class="btn sm" type="submit" id="cardSave">Save card</button></div></form></div>
-  <div class="dsec"><h3>On loan</h3><div id="dLoans"></div></div>
-  <div class="dsec"><h3>Reservations</h3><div id="dHolds"></div></div>
+  <div class="dsec" style="margin-top:0"><h3>Account</h3><div id="dAcct"></div></div>
+  <div class="dsec"><h3>Your loans</h3><div id="dLoans"></div></div>
+  <div class="dsec"><h3>History</h3><div id="dHist"></div></div>
+  <div class="dsec"><h3>Your questions</h3><div id="dQs"></div></div>
   <div class="dsec"><h3>Wishlist</h3><div id="dWish"></div></div>
 </aside>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mcard" id="mcard"></div></div>
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="aTitle"><div class="mcard auth" id="authCard"></div></div>
+<div class="sheet" id="admin" role="dialog" aria-modal="true" aria-labelledby="adminTitle" aria-hidden="true">
+  <div class="sheetbar"><div class="wrap">
+    <div style="margin-right:auto"><div class="eyebrow">Librarian</div><h2 id="adminTitle">Library admin</h2></div>
+    <div class="atabs" id="aTabs" role="tablist"></div>
+    <button class="iconbtn" id="aClose" aria-label="Close admin">✕</button>
+  </div></div>
+  <div class="wrap sheetbody"><p class="demo-note" id="aMode" hidden>Demo mode: this data lives only in this browser. Connect Firebase (see SETUP.md) to share it with all librarians and students.</p><div id="aBody"></div></div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="config.js"></script>
+<script src="js/backend.js"></script>
 <script src="data/catalog.js"></script>
 <script>
 (function(){
@@ -446,20 +515,25 @@ function coverImg(b,size){return b.isbns.length?'<img class="cv" data-id="'+b.id
 document.addEventListener("error",function(e){var im=e.target;if(!im||im.tagName!=="IMG"||!im.classList.contains("cv"))return;var b=BYID[im.dataset.id],i=+im.dataset.i+1;if(b&&b.isbns[i]){im.dataset.i=i;im.src="https://covers.openlibrary.org/b/isbn/"+b.isbns[i]+"-"+im.dataset.s+".jpg?default=false"}else im.remove()},true);
 document.addEventListener("load",function(e){var im=e.target;if(!im||im.tagName!=="IMG"||!im.classList.contains("cv"))return;if(im.naturalWidth<=2){im.dispatchEvent(new Event("error"));return}var c=im.closest(".cover");im.classList.add("ok");if(c)c.classList.add("has-img")},true);
 var nf=function(n){return n.toLocaleString("en-US")};
-var nT=$("#nTitles");if(nT&&B.length)nT.textContent=nf(B.length);
+var nT=$("#nTitles");if(nT&&B.length)nT.textContent=nf(liveCount());
 
-/* ---------- state ---------- */
+/* ---------- state: the wishlist stays on this device; loans and questions live in the account backend ---------- */
 var KEY="hma-lib-v2",mem=null;
-function load(){try{var r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return mem||{card:null,loans:[],holds:[],wish:[],returned:0}}
+function load(){try{var r=localStorage.getItem(KEY);if(r){var o=JSON.parse(r);return {wish:o.wish||[]}}}catch(e){}return mem||{wish:[]}}
 var S=load();
 function save(){mem=S;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function mine(id){return S.loans.some(function(l){return l.id===id})}
-function avail(b){return Math.max(0,b.copies-b.out-(mine(b.id)?1:0))}
-function status(b){if(mine(b.id))return ["low","Borrowed by you"];var a=avail(b);return a===0?["out","Checked out"]:a===1?["ok","Available"]:["ok",a+" available"]}
+var U=null,LOANS=[],ALL=[],TAKEN={},MYQ=[],QS=[];
+function isActive(l){return (l.status==="requested"&&l.expiresAt>Date.now())||l.status==="borrowed"}
+function activeLoan(id){for(var i=0;i<LOANS.length;i++)if(LOANS[i].bookId===id&&isActive(LOANS[i]))return LOANS[i]}
+function mine(id){return !!activeLoan(id)}
+function avail(b){return Math.max(0,b.copies-b.out-(TAKEN[b.id]||0))}
+function status(b){var l=activeLoan(b.id);if(l)return ["low",l.status==="borrowed"?"Borrowed by you":"Held for you"];var a=avail(b);return a===0?["out","Checked out"]:a===1?["ok","Available"]:["ok",a+" available"]}
 function fmtD(s){return fmt(s+"T12:00:00")}
+function fmtT(ms){return new Date(ms).toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
 var DAY=864e5;
 function fmt(d){return new Date(d).toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}
 function iso(d){var x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")}
+function liveCount(){var n=0;for(var i=0;i<B.length;i++)if(!B[i].withdrawn)n++;return n}
 
 /* ---------- toast ---------- */
 var tt;function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},3200)}
@@ -525,7 +599,7 @@ if(!RM)hero.addEventListener("pointermove",function(e){var r=hero.getBoundingCli
 })();
 
 /* ---------- spines ---------- */
-var catCounts={};B.forEach(function(b){(b.shelves.length?b.shelves:[UNSORTED]).forEach(function(s){catCounts[s]=(catCounts[s]||0)+1})});
+var catCounts={};function recount(){catCounts={};B.forEach(function(b){if(b.withdrawn)return;(b.shelves.length?b.shelves:[UNSORTED]).forEach(function(s){catCounts[s]=(catCounts[s]||0)+1})})}recount();
 var CATS=SH.filter(function(n){return n!=="Your library"}).concat(catCounts[UNSORTED]?[UNSORTED]:[]);
 var spl=[];CATS.slice(0,12).forEach(function(c){var cand=B.filter(function(b){return b.cat===c&&b.title.length<=26&&b.author});for(var j=0;j<3&&cand.length;j++){var pk=cand[Math.floor((j+.5)*cand.length/3)];if(spl.indexOf(pk)<0)spl.push(pk)}});
 $("#spines").innerHTML=spl.map(function(b,i){var h=110+((b.id.charCodeAt(3)*13+b.id.charCodeAt(5))%70);return '<button class="spine" style="--i:'+i+';--h:'+h+'px;--c:hsl('+b.h+' 55% 38%)" data-id="'+b.id+'" title="'+esc(b.title)+'" aria-label="'+esc(b.title)+', view in catalog"><span>'+esc(b.title)+'</span></button>'}).join("");
@@ -533,7 +607,7 @@ $("#spines").onclick=function(e){var s=e.target.closest(".spine");if(!s)return;v
 
 /* ---------- catalog ---------- */
 var F={q:"",cat:"All",fmt:"",sort:"title",only:false},PAGE=48,shown=PAGE,cur2=[];
-$("#chips").innerHTML=["All"].concat(CATS).map(function(c){return '<button class="chip" data-c="'+esc(c)+'" aria-pressed="'+(c==="All")+'">'+esc(c)+'<i>'+nf(c==="All"?B.length:catCounts[c])+'</i></button>'}).join("");
+function buildChips(){$("#chips").innerHTML=["All"].concat(CATS).map(function(c){return '<button class="chip" data-c="'+esc(c)+'" aria-pressed="'+(c===F.cat)+'">'+esc(c)+'<i>'+nf(c==="All"?liveCount():(catCounts[c]||0))+'</i></button>'}).join("")}buildChips();
 (function(){var m={};B.forEach(function(b){var k=b.media||"__none";m[k]=(m[k]||0)+1});
   $("#fmt").insertAdjacentHTML("beforeend",Object.keys(m).sort(function(a,b){return m[b]-m[a]}).map(function(k){return '<option value="'+esc(k)+'">'+(k==="__none"?"Format not listed":esc(k))+' ('+nf(m[k])+')</option>'}).join(""))})();
 function refilter(){shown=PAGE;render()}
@@ -546,6 +620,7 @@ function match(b,q){q=q.trim().toLowerCase();if(!q)return true;return q.split(/\
 function list(){
   var q=F.q.trim().toLowerCase(),ws=q?q.split(/\s+/):[];
   var r=B.filter(function(b){
+    if(b.withdrawn)return false;
     if(F.cat!=="All"){if(F.cat===UNSORTED){if(b.shelves.length)return false}else if(b.shelves.indexOf(F.cat)<0)return false}
     if(F.fmt&&(F.fmt==="__none"?b.media:b.media!==F.fmt))return false;
     if(F.only&&avail(b)<1)return false;
@@ -561,21 +636,21 @@ function cardHTML(b,i){var s=status(b),w=S.wish.indexOf(b.id)>-1;
   '<div><h3>'+esc(b.title)+'</h3><div class="au">'+esc(b.author||"Author not listed")+'</div></div><div class="meta"><span class="call">'+esc(b.call||"No call no.")+'</span><span class="pill '+s[0]+'">'+s[1]+'</span></div></article>'}
 function paint(){
   var r=cur2.slice(0,shown);
-  $("#count").textContent=nf(cur2.length)+" of "+nf(B.length)+" titles"+(cur2.length>shown?" · showing "+nf(shown):"");
+  $("#count").textContent=nf(cur2.length)+" of "+nf(liveCount())+" titles"+(cur2.length>shown?" · showing "+nf(shown):"");
   $("#grid").innerHTML=r.length?r.map(cardHTML).join(""):(B.length?'<div class="empty"><h3>No titles match</h3><p>Try fewer words or clear the filters.</p><p style="margin-top:16px"><button class="btn sm" id="reset">Clear filters</button></p></div>':'<div class="empty"><h3>The catalog did not load</h3><p>Keep data/catalog.js next to index.html.</p></div>');
   var rs=$("#reset");if(rs)rs.onclick=function(){F={q:"",cat:"All",fmt:"",sort:"title",only:false};$("#q").value="";$("#fmt").value="";$("#sort").value="title";$("#onlyAvail").checked=false;refilter()};
   $("#more").hidden=cur2.length<=shown}
 function render(){
   $$("#chips .chip").forEach(function(c){c.setAttribute("aria-pressed",c.dataset.c===F.cat)});
   cur2=list();paint();stats();badge()}
-$("#more").onclick=function(){var from=shown;shown+=PAGE;$("#grid").insertAdjacentHTML("beforeend",cur2.slice(from,shown).map(function(b,i){return cardHTML(b,i)}).join(""));$("#count").textContent=nf(cur2.length)+" of "+nf(B.length)+" titles"+(cur2.length>shown?" · showing "+nf(shown):"");$("#more").hidden=cur2.length<=shown};
+$("#more").onclick=function(){var from=shown;shown+=PAGE;$("#grid").insertAdjacentHTML("beforeend",cur2.slice(from,shown).map(function(b,i){return cardHTML(b,i)}).join(""));$("#count").textContent=nf(cur2.length)+" of "+nf(liveCount())+" titles"+(cur2.length>shown?" · showing "+nf(shown):"");$("#more").hidden=cur2.length<=shown};
 $("#grid").onclick=function(e){var h=e.target.closest("[data-heart]");if(h){toggleWish(h.dataset.heart);return}var o=e.target.closest("[data-open]");if(o)openBook(o.dataset.open)};
 function toggleWish(id){var i=S.wish.indexOf(id);if(i>-1){S.wish.splice(i,1);toast("Removed from wishlist")}else{S.wish.push(id);toast("Saved to your wishlist")}save();render();drawer()}
 
 /* stats with count-up */
 var statVals=[];
 function stats(){
-  var total=B.length,av=B.reduce(function(n,b){return n+avail(b)},0),out=B.reduce(function(n,b){return n+b.copies-avail(b)},0),copies=B.reduce(function(n,b){return n+b.copies},0);
+  var LB=B.filter(function(b){return !b.withdrawn}),total=LB.length,av=LB.reduce(function(n,b){return n+avail(b)},0),out=LB.reduce(function(n,b){return n+b.copies-avail(b)},0),copies=LB.reduce(function(n,b){return n+b.copies},0);
   var v=[[total,"Titles"],[copies,"Copies"],[av,"On the shelf now"],[out,"Out on loan"]];
   var el=$("#stats");
   if(!el.children.length)el.innerHTML=v.map(function(){return '<div class="stat"><b>0</b><small></small></div>'}).join("");
@@ -587,10 +662,15 @@ function countUp(){$$("#stats b").forEach(function(b){var t=+b.dataset.t,s=perfo
 var lastFocus=null;
 function row(k,v){return v?'<dt>'+k+'</dt><dd>'+v+'</dd>':''}
 function openBook(id){
-  var b=BYID[id],s=status(b),m=mine(id),h=S.holds.indexOf(id)>-1;if(!$("#modal").classList.contains("on"))lastFocus=document.activeElement;
-  var btn=m?'<button class="btn" data-ret="'+id+'">Return this book</button>':avail(b)>0?'<button class="btn" data-bor="'+id+'">Borrow for 14 days</button>':h?'<button class="btn ghost" data-unhold="'+id+'">Cancel reservation</button>':'<button class="btn" data-hold="'+id+'">Reserve a copy</button>';
+  var b=BYID[id],s=status(b),l=activeLoan(id);if(!$("#modal").classList.contains("on"))lastFocus=document.activeElement;
+  var btn;
+  if(!U)btn='<button class="btn" data-signin>Sign in to borrow</button>';
+  else if(l&&l.status==="requested")btn='<button class="btn" data-ci="'+l.id+'" data-book="'+id+'">Check in</button><button class="btn ghost" data-cx="'+l.id+'" data-book="'+id+'">Cancel hold</button>';
+  else if(l)btn='<button class="btn" data-rt="'+l.id+'" data-book="'+id+'">Return this book</button>';
+  else if(avail(b)>0)btn='<button class="btn" data-bor="'+id+'">Borrow</button>';
+  else btn='<button class="btn" disabled>Checked out</button>';
   var who=esc(b.author||"Author not listed")+(b.author&&b.role&&b.role!=="Author"?' ('+esc(b.role)+')':'')+(b.author2?'<br>'+esc(b.author2)+(b.role2&&b.role2!=="Author"?' ('+esc(b.role2)+')':''):'');
-  var avl=m?'Borrowed by you, due '+fmt(S.loans.filter(function(l){return l.id===id})[0].due):b.out?'Checked out'+(b.due?', due '+fmtD(b.due):''):avail(b)+' of '+b.copies+' on the shelf';
+  var avl=l?(l.status==="borrowed"?'Borrowed by you, due '+fmt(l.dueAt):'Held for you until '+fmtT(l.expiresAt)+'. Check in when you collect it.'):avail(b)>0?avail(b)+' of '+b.copies+' on the shelf':'Checked out'+(b.due?', due '+fmtD(b.due):'');
   var cls=[b.dewey&&'Dewey '+esc(b.dewey),b.lc&&'LC '+esc(b.lc)].filter(Boolean).join(' · ')+(b.dwText?'<span class="sub">'+esc(b.dwText)+'</span>':'');
   var subs=b.subs.slice(0,8).map(esc).join('; ')+(b.subs.length>8?' (+'+(b.subs.length-8)+' more)':'');
   $("#mcard").innerHTML='<button class="iconbtn mclose" data-close aria-label="Close details">✕</button><button class="cover" style="--h:'+b.h+';cursor:default" tabindex="-1">'+coverImg(b,"L")+'<small>'+esc(b.cat)+(b.year?' · '+b.year:'')+'</small><b>'+esc(b.title)+'</b></button>'+
@@ -599,22 +679,28 @@ function openBook(id){
    '</dl><div style="display:flex;gap:10px;flex-wrap:wrap">'+btn+'<button class="btn ghost" data-heart2="'+id+'">'+(S.wish.indexOf(id)>-1?"Remove from wishlist":"Add to wishlist")+'</button></div></div>';
   $("#modal").classList.add("on");$("#scrim").classList.add("on");$("#scrim").dataset.for="modal";var c=$("[data-close]");if(c)c.focus();
 }
-function closeModal(){$("#modal").classList.remove("on");if(!$("#drawer").classList.contains("on"))$("#scrim").classList.remove("on");if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function closeModal(){$("#modal").classList.remove("on");if(!$("#drawer").classList.contains("on")&&!$("#authModal").classList.contains("on"))$("#scrim").classList.remove("on");if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 $("#modal").onclick=function(e){if(e.target===this||e.target.closest("[data-close]")){closeModal();return}
-  var t=e.target.closest("button");if(!t)return;var d=t.dataset;
-  if(d.bor){if(borrow(d.bor)!==false)openBook(d.bor)}else if(d.ret){giveBack(d.ret);openBook(d.ret)}else if(d.hold){if(hold(d.hold)!==false)openBook(d.hold)}else if(d.unhold){unhold(d.unhold);openBook(d.unhold)}else if(d.heart2){toggleWish(d.heart2);openBook(d.heart2)}};
+  var t=e.target.closest("button");if(!t||t.disabled)return;var d=t.dataset;
+  if("signin" in d){closeModal();openAuth("Sign in with your school Google account to borrow books.")}
+  else if(d.bor){borrow(d.bor).then(function(r){if(r!==false)openBook(d.bor)})}
+  else if(d.ci){doAct(d.ci,"checkin","Checked in. Due in 14 days.").then(function(){openBook(d.book)})}
+  else if(d.cx){doAct(d.cx,"cancel","Hold cancelled.").then(function(){openBook(d.book)})}
+  else if(d.rt){doAct(d.rt,"return","Returned. Thank you!").then(function(){openBook(d.book)})}
+  else if(d.heart2){toggleWish(d.heart2);openBook(d.heart2)}};
 function borrow(id){
-  if(!S.card){closeModal();openDrawer();toast("Create your library card first");return false}
-  var b=BYID[id];if(mine(id))return;if(S.loans.length>=3){toast("Limit reached: return a book first (3 at a time)");return}
-  if(avail(b)<1){toast("No copies on the shelf. Reserve instead.");return}
-  S.loans.push({id:id,due:Date.now()+14*DAY,renewed:false});S.holds=S.holds.filter(function(x){return x!==id});save();render();drawer();toast("Borrowed. Due "+fmt(Date.now()+14*DAY))}
-function giveBack(id){S.loans=S.loans.filter(function(l){return l.id!==id});S.returned++;save();render();drawer();toast("Returned. Thank you!")}
-function hold(id){if(!S.card){closeModal();openDrawer();toast("Create your library card first");return false}if(S.holds.indexOf(id)<0)S.holds.push(id);save();drawer();render();toast("Reserved. We will hold the next copy for you")}
-function unhold(id){S.holds=S.holds.filter(function(x){return x!==id});save();drawer();render();toast("Reservation cancelled")}
+  if(!U){closeModal();openAuth("Sign in with your school Google account to borrow books.");return Promise.resolve(false)}
+  var b=BYID[id];if(mine(id))return Promise.resolve(false);
+  if(LOANS.filter(isActive).length>=3){toast("You can have 3 books at a time. Return one first.");return Promise.resolve(false)}
+  if(avail(b)<1){toast("No copies on the shelf right now.");return Promise.resolve(false)}
+  return BE.borrow(U,b).then(function(){toast("Held for you for 48 hours. Check in when you collect it.");return refreshData()}).then(function(){return true},function(e){toast(errMsg(e));return false})}
+function doAct(id,action,msg){
+  var l=LOANS.concat(ALL).filter(function(x){return x.id===id})[0];if(!l)return Promise.resolve();
+  return BE.act(l,action,U).then(function(){toast(msg);return refreshData()}).then(function(){if($("#admin").classList.contains("on"))return loadAdmin()}).catch(function(e){toast(errMsg(e))})}
 
 /* ---------- hero search ---------- */
 var hq=$("#heroQ"),sg=$("#sugg"),hi=-1,cur=[];
-function suggest(){var v=hq.value;if(!v.trim()){sg.classList.remove("open");return}cur=B.filter(function(b){return match(b,v)}).slice(0,5);hi=-1;
+function suggest(){var v=hq.value;if(!v.trim()){sg.classList.remove("open");return}cur=B.filter(function(b){return !b.withdrawn&&match(b,v)}).slice(0,5);hi=-1;
   sg.innerHTML=cur.length?cur.map(function(b,i){return '<button role="option" data-id="'+b.id+'"><i style="--c:hsl('+b.h+' 55% 38%)"></i><span><b>'+esc(b.title)+'</b><small>'+esc(b.author)+' · '+esc(b.call)+'</small></span></button>'}).join(""):'<div class="none" style="padding:12px">No match yet. Press Search to see the full catalog.</div>';sg.classList.add("open")}
 hq.oninput=suggest;
 hq.onkeydown=function(e){var bs=$$("button",sg);if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(!bs.length)return;hi=(hi+(e.key==="ArrowDown"?1:-1)+bs.length)%bs.length;bs.forEach(function(b,i){b.classList.toggle("hi",i===hi)})}else if(e.key==="Enter"){e.preventDefault();if(hi>-1&&cur[hi]){pick(cur[hi].id)}else go()}else if(e.key==="Escape")sg.classList.remove("open")};
@@ -638,37 +724,204 @@ $("#tabs").onclick=function(e){var t=e.target.closest(".tab");if(!t)return;curTa
 addEventListener("resize",tab);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(tab);
 
-/* ---------- ring ---------- */
+/* ---------- accounts: Google sign-in (or demo mode), students and librarians ---------- */
+var CFG=window.HMA_CONFIG||{},BE=window.HMA_BACKEND?window.HMA_BACKEND(CFG):null;
+var G_SVG='<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+function errMsg(e){if(e&&e.code==="permission-denied")return "You do not have permission to do that.";return e&&e.message&&!e.code?e.message:"Something went wrong. Check your connection and try again."}
+function initial(u){return esc((u.name||u.email||"?").trim().charAt(0).toUpperCase())}
+function avatarHTML(u){return u.photo?'<img src="'+esc(u.photo)+'" alt="" referrerpolicy="no-referrer">':initial(u)}
+function roleName(u){return u.role==="admin"?"Librarian":"Student"}
+
+/* books edited or added by librarians */
+function reindex(b){
+  b.isbns=(b.isbns||[]).filter(function(x,i,a){return x&&a.indexOf(x)===i});
+  if(b.isbn&&b.isbns.indexOf(b.isbn)<0)b.isbns.unshift(b.isbn);
+  b.cat=b.shelves[0]||UNSORTED;
+  b.ak=b.author?(b.author.split(" ").slice(-1)[0]+" "+b.author).toLowerCase():"~";
+  b.tk=b.title.toLowerCase();b.year=parseInt(b.date,10)||0;
+  b.h=(SHELF_HUE[b.cat]||210)+(parseInt(String(b.id).replace(/\D/g,"").slice(-2)||"0",10)%14);
+  b.s=(b.title+" "+b.author+" "+b.author2+" "+b.isbn+" "+b.isbns.join(" ")+" "+b.call+" "+b.lc+" "+b.dewey+" "+b.pub+" "+b.shelves.join(" ")+" "+b.tags.join(" ")+" "+b.subs.join(" ")).toLowerCase()}
+function patchBook(b,f){
+  ["title","author","media","date","call","summary"].forEach(function(k){if(f[k]!==undefined)b[k]=String(f[k])});
+  if(f.copies!==undefined&&!isNaN(+f.copies))b.copies=Math.max(0,parseInt(f.copies,10));
+  if(f.isbn!==undefined&&f.isbn!==b.isbn){b.isbn=String(f.isbn)}
+  if(f.shelf!==undefined)b.shelves=f.shelf?[f.shelf]:[];
+  b.withdrawn=!!f.withdrawn;reindex(b)}
+function makeBook(f){
+  var b={id:String(f.id),title:"",author:"",role:"",author2:"",role2:"",pub:"",date:"",media:"",pages:0,lang:"English",shelves:[],cat:UNSORTED,lc:"",dewey:"",dwText:"",isbn:"",isbns:[],subs:[],summary:"",copies:1,due:"",out:0,added:iso(Date.now()),tags:[],call:"",source:"added by library",withdrawn:false};
+  patchBook(b,f);return b}
+function isAdded(b){return b.source==="added by library"}
+function applyOverlay(o){
+  Object.keys(o.edits||{}).forEach(function(id){var b=BYID[id];if(b)patchBook(b,o.edits[id])});
+  (o.added||[]).forEach(function(f){var b=BYID[f.id];if(b)patchBook(b,f);else{b=makeBook(f);B.push(b);BYID[b.id]=b}});
+  recount();buildChips();render()}
+
+/* data for the signed-in student */
+function afterData(){render();drawer();ring()}
+function refreshData(){
+  if(!U||!BE){TAKEN={};LOANS=[];MYQ=[];afterData();return Promise.resolve()}
+  return Promise.all([BE.loadTaken(),BE.myLoans(U),BE.myQuestions(U)]).then(function(r){TAKEN=r[0];LOANS=r[1];MYQ=r[2];afterData()},function(e){console.warn(e);toast("Could not reach the library server.");afterData()})}
+function startBackend(){
+  if(!BE)return;
+  BE.loadOverlay().then(applyOverlay);
+  BE.onAuth(function(u,err){
+    U=u;renderAuth();
+    if(err)authError(err);
+    else if(u&&$("#authModal").classList.contains("on")){closeAuth();toast("Signed in as "+u.name)}
+    if(!u){closeAdmin();ALL=[];QS=[]}
+    refreshData()})}
+
+/* header: sign in button or account menu */
+function renderAuth(){
+  var s=$("#authSlot");
+  s.innerHTML=!U?'<button class="btn sm" id="signInBtn">Sign in</button>':
+    '<button class="avatar" id="userBtn" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu for '+esc(U.name)+'">'+avatarHTML(U)+'</button><div class="umenu" id="userMenu" role="menu" hidden><div class="uinfo"><b>'+esc(U.name)+'</b><small>'+esc(U.email)+'</small><span class="pill '+(U.role==="admin"?"low":"ok")+'">'+roleName(U)+'</span></div><button role="menuitem" data-m="shelf">My shelf</button>'+(U.role==="admin"?'<button role="menuitem" data-m="admin">Library admin</button>':'')+'<button role="menuitem" data-m="out">Sign out</button></div>';
+  var n=$("#aname");n.value=U?U.name:"";n.readOnly=!!U;
+  $("#askNote").textContent=U?"":"Sign in with your school Google account to send a question.";
+  $("#askBtn").textContent=U?"Send question":"Sign in to ask"}
+function toggleMenu(force){var mn=$("#userMenu"),b=$("#userBtn");if(!mn)return;var open=force===undefined?mn.hidden:force;mn.hidden=!open;b.setAttribute("aria-expanded",String(open))}
+$("#authSlot").onclick=function(e){
+  if(e.target.closest("#signInBtn")){openAuth();return}
+  if(e.target.closest("#userBtn")){toggleMenu();return}
+  var m=e.target.closest("[data-m]");if(!m)return;toggleMenu(false);
+  if(m.dataset.m==="shelf")openDrawer();else if(m.dataset.m==="admin")openAdmin();else BE.signOut().then(function(){toast("Signed out")})};
+document.addEventListener("click",function(e){if(!e.target.closest("#authSlot"))toggleMenu(false)});
+
+/* sign-in dialog */
+function openAuth(msg){
+  var demo=BE&&BE.mode==="demo",dom=CFG.allowedDomain||"hmacademy.org";
+  $("#authCard").innerHTML='<button class="iconbtn mclose" data-aclose aria-label="Close sign in">✕</button><div class="aintro"><img class="mark2" src="assets/logo-mark.png" width="48" height="48" alt=""><h2 id="aTitle">Sign in</h2><p>Use your school Google account (<b>@'+esc(dom)+'</b>) to borrow books, check them in and return them, and to ask the librarians.</p></div>'+(msg?'<p class="amsg">'+esc(msg)+'</p>':'')+'<p class="aerr" id="authErr" role="alert" hidden></p>'+
+    (demo?'<div class="demo"><b>Demo mode</b><p>Google sign-in is not connected yet. Try the site with a practice account. Everything stays in this browser. SETUP.md explains how to turn on real sign-in.</p><div class="drow"><button class="btn" data-demo="student">Continue as student</button><button class="btn ghost" data-demo="admin">Continue as librarian</button></div></div>':
+    '<button class="gbtn" id="gSign">'+G_SVG+'Sign in with Google</button><p class="note">Only accounts ending in @'+esc(dom)+' can sign in.</p>');
+  $("#authModal").classList.add("on");$("#scrim").classList.add("on");$("#scrim").dataset.for="auth";
+  var f=$("[data-demo],#gSign");if(f)f.focus()}
+function closeAuth(){$("#authModal").classList.remove("on");if(!$("#drawer").classList.contains("on")&&!$("#modal").classList.contains("on"))$("#scrim").classList.remove("on")}
+function authError(m){if(!$("#authModal").classList.contains("on"))openAuth();var el=$("#authErr");el.textContent=m;el.hidden=false}
+$("#authModal").onclick=function(e){
+  if(e.target===this||e.target.closest("[data-aclose]")){closeAuth();return}
+  var d=e.target.closest("[data-demo]");if(d){BE.signIn({role:d.dataset.demo});return}
+  var g=e.target.closest("#gSign");if(g){g.disabled=true;BE.signIn().then(function(){},function(err){g.disabled=false;if(err&&(err.code==="auth/popup-closed-by-user"||err.code==="auth/cancelled-popup-request"))return;authError(errMsg(err))})}};
+
+/* ask a librarian */
+$("#askForm").onsubmit=function(e){e.preventDefault();
+  if(!U){openAuth("Sign in to send a question to the librarians.");return}
+  var m=$("#amsg").value.trim();$("#fm").classList.toggle("bad",m.length<10);if(m.length<10)return;
+  var btn=$("#askBtn");btn.disabled=true;
+  BE.ask(U,{topic:$("#atopic").value,message:m}).then(function(){
+    var o=$("#askOk");o.innerHTML="<b>Thanks, "+esc(U.name.split(" ")[0])+".</b> Your question reached the librarians. Open My shelf to read their reply.";o.classList.add("on");$("#amsg").value="";return refreshData()
+  }).catch(function(err){toast(errMsg(err))}).then(function(){btn.disabled=false})};
+
+/* reading goal ring */
 var GOAL=5,C=2*Math.PI*62;
-function ring(){var n=Math.min(GOAL,S.returned+S.loans.length);$("#ringTxt").textContent=n+"/"+GOAL;$("#ringFg").style.strokeDashoffset=C*(1-n/GOAL);$("#ringNote").textContent=n>=GOAL?"Goal reached. Choose your next shelf!":(GOAL-n)+" more to go. Books you borrow and return both count."}
+function ring(){var n=U?Math.min(GOAL,LOANS.filter(function(l){return l.status==="returned"||l.status==="borrowed"}).length):0;$("#ringTxt").textContent=n+"/"+GOAL;$("#ringFg").style.strokeDashoffset=C*(1-n/GOAL);$("#ringNote").textContent=!U?"Sign in to track your reading goal.":n>=GOAL?"Goal reached. Choose your next shelf!":(GOAL-n)+" more to go. Books you borrow and return both count."}
 
-/* ---------- ask form ---------- */
-$("#askForm").onsubmit=function(e){e.preventDefault();var n=$("#aname").value.trim(),m=$("#amsg").value.trim();
-  $("#fn").classList.toggle("bad",!n);$("#fm").classList.toggle("bad",m.length<10);if(!n||m.length<10)return;
-  var ref="Q-"+Math.random().toString(36).slice(2,6).toUpperCase(),o=$("#askOk");
-  o.innerHTML="<b>Thanks, "+esc(n.split(" ")[0])+".</b> Your question on “"+esc($("#atopic").value)+"” is saved as <span style='font-family:var(--f-mono)'>"+ref+"</span>. This demo keeps it on this device only. Ask at the desk for a reply.";o.classList.add("on");this.reset();toast("Question saved")};
-
-/* ---------- drawer ---------- */
+/* ---------- my shelf drawer ---------- */
 var dl=null;
 function openDrawer(){dl=document.activeElement;$("#drawer").classList.add("on");$("#drawer").setAttribute("aria-hidden","false");$("#scrim").classList.add("on");$("#scrim").dataset.for="drawer";drawer();setTimeout(function(){$("#dClose").focus()},300)}
-function closeDrawer(){$("#drawer").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");if(!$("#modal").classList.contains("on"))$("#scrim").classList.remove("on");if(dl&&dl.focus)dl.focus()}
+function closeDrawer(){$("#drawer").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true");if(!$("#modal").classList.contains("on")&&!$("#authModal").classList.contains("on"))$("#scrim").classList.remove("on");if(dl&&dl.focus)dl.focus()}
 $("#shelfBtn").onclick=openDrawer;$("#dClose").onclick=closeDrawer;
-$("#scrim").onclick=function(){closeModal();closeDrawer()};
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){if($("#modal").classList.contains("on"))closeModal();else if($("#drawer").classList.contains("on"))closeDrawer()}});
-function item(b,right){return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>'+right+'</small></div></div>'}
-function badge(){var n=S.loans.length+S.holds.length;var e=$("#shelfBadge");e.textContent=n;e.classList.toggle("on",n>0)}
+$("#scrim").onclick=function(){closeModal();closeDrawer();closeAuth()};
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;toggleMenu(false);
+  if($("#authModal").classList.contains("on"))closeAuth();else if($("#modal").classList.contains("on"))closeModal();else if($("#drawer").classList.contains("on"))closeDrawer();else if($("#admin").classList.contains("on"))closeAdmin()});
+function badge(){var n=U?LOANS.filter(isActive).length:0;var e=$("#shelfBadge");e.textContent=n;e.classList.toggle("on",n>0)}
+function loanRow(l){
+  var b=BYID[l.bookId]||{h:210,title:l.title},sub,acts;
+  if(l.status==="requested"){sub="Held for you until "+fmtT(l.expiresAt);acts='<button class="btn sm" data-ci="'+l.id+'">Check in</button><button class="btn ghost sm" data-cx="'+l.id+'">Cancel</button>'}
+  else{var over=l.dueAt<Date.now();sub=(over?"Overdue, was due ":"Due ")+fmt(l.dueAt);acts='<button class="btn sm" data-rt="'+l.id+'">Return</button>'}
+  return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(l.title||b.title)+'</b><small>'+sub+'</small></div><div class="acts">'+acts+'</div></div>'}
+function histRow(l){
+  var b=BYID[l.bookId]||{h:210,title:l.title},sub=l.status==="returned"?"Returned "+fmt(l.returnedAt):l.status==="requested"?"Hold expired":"Hold cancelled";
+  return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(l.title||b.title)+'</b><small>'+sub+'</small></div></div>'}
 function drawer(){
-  $("#cname").value=$("#cname").value||(S.card?S.card.name:"");if(S.card){$("#cgrade").value=S.card.grade;$("#cno").value=S.card.no;$("#cardSave").textContent="Update card"}
-  $("#dLoans").innerHTML=S.loans.length?S.loans.map(function(l){var b=BYID[l.id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>Due '+fmt(l.due)+(l.renewed?" · renewed":"")+'</small></div><div class="acts" style="flex:none"><button class="btn ghost sm" data-renew="'+l.id+'"'+(l.renewed?" disabled":"")+'>Renew</button><button class="btn sm" data-return="'+l.id+'">Return</button></div></div>'}).join(""):'<p class="none">Nothing borrowed yet.</p>';
-  $("#dHolds").innerHTML=S.holds.length?S.holds.map(function(id){var b=BYID[id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>Waiting for a copy</small></div><button class="btn ghost sm" data-unhold="'+id+'">Cancel</button></div>'}).join(""):'<p class="none">No reservations.</p>';
-  $("#dWish").innerHTML=S.wish.length?S.wish.map(function(id){var b=BYID[id];return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>'+esc(b.author)+'</small></div><button class="btn ghost sm" data-view="'+id+'">View</button></div>'}).join(""):'<p class="none">Tap the heart on any book to save it.</p>';
-  badge();ring();
-}
+  $("#dAcct").innerHTML=U?'<div class="acct"><span class="avatar big">'+avatarHTML(U)+'</span><div><b>'+esc(U.name)+'</b><small>'+esc(U.email)+'</small></div><span class="pill '+(U.role==="admin"?"low":"ok")+'">'+roleName(U)+'</span></div><div class="drow" style="margin-top:12px">'+(U.role==="admin"?'<button class="btn sm" data-d="admin">Library admin</button>':'')+'<button class="btn ghost sm" data-d="out">Sign out</button></div>':'<p class="none">Sign in with your school Google account to borrow books, check them in and return them.</p><p style="margin-top:12px"><button class="btn sm" data-d="in">Sign in</button></p>';
+  var act=LOANS.filter(isActive).sort(function(a,b){return (a.dueAt||a.expiresAt)-(b.dueAt||b.expiresAt)});
+  var hist=LOANS.filter(function(l){return !isActive(l)}).sort(function(a,b){return (b.returnedAt||b.requestedAt)-(a.returnedAt||a.requestedAt)}).slice(0,8);
+  $("#dLoans").innerHTML=!U?'<p class="none">Sign in to see your loans.</p>':act.length?act.map(loanRow).join(""):'<p class="none">Nothing borrowed right now. Find a book in the catalog and tap Borrow.</p>';
+  $("#dHist").innerHTML=hist.length?hist.map(histRow).join(""):'<p class="none">Returned books will show here.</p>';
+  $("#dQs").innerHTML=!U?'<p class="none">Sign in to see your questions.</p>':MYQ.length?MYQ.slice().sort(function(a,b){return b.createdAt-a.createdAt}).map(function(q){return '<div class="li qli"><div><b>'+esc(q.topic)+'</b><small>'+esc(q.message)+'</small>'+(q.status==="answered"?'<span class="reply">'+esc(q.reply)+'<small>Reply from '+esc(q.repliedBy||"the library")+'</small></span>':'<small class="wait">Waiting for a reply</small>')+'</div></div>'}).join(""):'<p class="none">Questions you send to the librarians show here with their replies.</p>';
+  $("#dWish").innerHTML=S.wish.length?S.wish.map(function(id){var b=BYID[id];if(!b)return "";return '<div class="li"><span class="sw2" style="--h:'+b.h+'"></span><div><b>'+esc(b.title)+'</b><small>'+esc(b.author)+'</small></div><button class="btn ghost sm" data-view="'+id+'">View</button></div>'}).join(""):'<p class="none">Tap the heart on any book to save it on this device.</p>';
+  badge();ring()}
 $("#drawer").onclick=function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
-  if(d.return)giveBack(d.return);else if(d.renew){var l=S.loans.filter(function(x){return x.id===d.renew})[0];if(l&&!l.renewed){l.due+=7*DAY;l.renewed=true;save();drawer();toast("Renewed until "+fmt(l.due))}}
-  else if(d.unhold)unhold(d.unhold);else if(d.view){closeDrawer();setTimeout(function(){openBook(d.view)},350)}};
-$("#cardForm").onsubmit=function(e){e.preventDefault();var n=$("#cname").value.trim();$("#cn").classList.toggle("bad",!n);if(!n)return;
-  var no=S.card?S.card.no:"HMA-"+String(new Date().getFullYear())+"-"+String(Math.floor(100+Math.random()*900));S.card={name:n,grade:$("#cgrade").value,no:no};save();drawer();toast("Card saved: "+no)};
+  if(d.ci)doAct(d.ci,"checkin","Checked in. Due in 14 days.");else if(d.cx)doAct(d.cx,"cancel","Hold cancelled.");else if(d.rt)doAct(d.rt,"return","Returned. Thank you!");
+  else if(d.view){closeDrawer();setTimeout(function(){openBook(d.view)},350)}
+  else if(d.d==="in"){closeDrawer();openAuth()}else if(d.d==="out"){BE.signOut().then(function(){toast("Signed out")})}else if(d.d==="admin"){closeDrawer();openAdmin()}};
+
+/* ---------- librarian admin: loans, books, questions ---------- */
+var A={tab:"loans",lf:"active",lq:"",bq:"",qf:"open",edit:undefined};
+function openAdmin(){if(!U||U.role!=="admin"){toast("Librarian accounts only.");return}
+  $("#admin").classList.add("on");$("#admin").setAttribute("aria-hidden","false");document.documentElement.style.overflow="hidden";loadAdmin()}
+function closeAdmin(){var a=$("#admin");if(!a.classList.contains("on"))return;a.classList.remove("on");a.setAttribute("aria-hidden","true");document.documentElement.style.overflow=""}
+function loadAdmin(){return Promise.all([BE.allLoans(),BE.allQuestions()]).then(function(r){ALL=r[0];QS=r[1];renderAdmin()},function(e){toast(errMsg(e))})}
+function lstatus(l){
+  if(l.status==="requested")return l.expiresAt>Date.now()?["low","Held","held"]:["dim","Hold expired","gone"];
+  if(l.status==="borrowed")return l.dueAt<Date.now()?["out","Overdue","over"]:["ok","On loan","loan"];
+  if(l.status==="returned")return ["dim","Returned","done"];return ["dim","Cancelled","gone"]}
+function aTabs(){
+  var act=ALL.filter(isActive).length,over=ALL.filter(function(l){return l.status==="borrowed"&&l.dueAt<Date.now()}).length,nq=QS.filter(function(q){return q.status!=="answered"}).length;
+  return [["loans","Loans",act+(over?" · "+over+" overdue":"")],["books","Books",""],["qs","Questions",nq?nq+" new":""]].map(function(t){return '<button data-tab="'+t[0]+'" aria-selected="'+(A.tab===t[0])+'">'+t[1]+(t[2]?'<i>'+t[2]+'</i>':'')+'</button>'}).join("")}
+function renderAdmin(){
+  $("#aTabs").innerHTML=aTabs();var b=$("#aBody");
+  $("#aMode").hidden=!(BE&&BE.mode==="demo");
+  if(A.tab==="loans"){
+    var fo=[["active","Active (held and on loan)"],["held","Held, waiting to be collected"],["loan","On loan"],["over","Overdue"],["done","Returned"],["all","Everything"]];
+    b.innerHTML='<div class="atools"><label class="sr" for="lf">Show</label><select id="lf">'+fo.map(function(o){return '<option value="'+o[0]+'"'+(A.lf===o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select><label class="sr" for="lq">Search</label><input id="lq" type="search" placeholder="Search by book or student" value="'+esc(A.lq)+'"><span class="note" id="lcount"></span></div><div id="aList"></div>'}
+  else if(A.tab==="books"){
+    if(A.edit!==undefined){bookForm();return}
+    b.innerHTML='<div class="atools"><label class="sr" for="bq">Search books</label><input id="bq" type="search" placeholder="Search the catalog to edit a book" value="'+esc(A.bq)+'"><button class="btn sm" data-add>Add a book</button></div><div id="aList"></div>'}
+  else{
+    var qo=[["open","Waiting for a reply"],["answered","Answered"],["all","All"]];
+    b.innerHTML='<div class="atools"><label class="sr" for="qf">Show</label><select id="qf">'+qo.map(function(o){return '<option value="'+o[0]+'"'+(A.qf===o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select><span class="note" id="qcount"></span></div><div id="aList"></div>'}
+  aList()}
+function aList(){
+  var el=$("#aList");if(!el)return;
+  if(A.tab==="loans"){
+    var q=A.lq.trim().toLowerCase();
+    var r=ALL.filter(function(l){var st=lstatus(l)[2];
+      if(A.lf==="active"&&!(st==="held"||st==="loan"||st==="over"))return false;
+      if(A.lf==="held"&&st!=="held")return false;if(A.lf==="loan"&&st!=="loan")return false;if(A.lf==="over"&&st!=="over")return false;if(A.lf==="done"&&st!=="done")return false;
+      return !q||((l.title||"")+" "+l.name+" "+l.email).toLowerCase().indexOf(q)>-1});
+    r.sort(function(a,b){var ax=isActive(a)?0:1,bx=isActive(b)?0:1;return ax-bx||(ax?(b.returnedAt||b.requestedAt)-(a.returnedAt||a.requestedAt):(a.dueAt||a.expiresAt)-(b.dueAt||b.expiresAt))});
+    $("#lcount").textContent=r.length+(r.length===1?" loan":" loans");
+    el.innerHTML=r.length?'<div class="tblwrap"><table class="tbl"><thead><tr><th>Book</th><th>Student</th><th>Status</th><th>Dates</th><th><span class="sr">Actions</span></th></tr></thead><tbody>'+r.slice(0,150).map(function(l){
+      var st=lstatus(l),dates=l.status==="requested"?"Held until "+fmtT(l.expiresAt):l.status==="borrowed"?"Out "+fmt(l.borrowedAt)+"<small>Due "+fmt(l.dueAt)+(l.extended?" · extended":"")+"</small>":l.status==="returned"?"Returned "+fmt(l.returnedAt):"Requested "+fmt(l.requestedAt),acts="";
+      if(l.status==="requested")acts=(l.expiresAt>Date.now()?'<button class="btn sm" data-la="checkin" data-loan="'+l.id+'">Check in</button>':'')+'<button class="btn ghost sm" data-la="cancel" data-loan="'+l.id+'">Cancel</button>';
+      else if(l.status==="borrowed")acts='<button class="btn sm" data-la="return" data-loan="'+l.id+'">Mark returned</button><button class="btn ghost sm" data-la="extend" data-loan="'+l.id+'">+7 days</button>';
+      return '<tr><td><b>'+esc(l.title||"")+'</b></td><td>'+esc(l.name)+'<small>'+esc(l.email)+'</small></td><td><span class="pill '+st[0]+'">'+st[1]+'</span></td><td>'+dates+'</td><td><div class="acts">'+acts+'</div></td></tr>'}).join("")+'</tbody></table></div>'+(r.length>150?'<p class="note" style="margin-top:10px">Showing the first 150. Use the search to narrow it down.</p>':''):'<div class="empty"><h3>No loans here</h3><p>Loans appear when students borrow books.</p></div>'}
+  else if(A.tab==="books"){
+    var bq=A.bq.trim().toLowerCase(),words=bq?bq.split(/\s+/):[],res=bq?B.filter(function(b){return words.every(function(w){return b.s.indexOf(w)>-1})}).slice(0,30):B.filter(isAdded).slice(0,30);
+    el.innerHTML=(bq?'':'<p class="note" style="margin-bottom:12px">'+(res.length?"Books added by the library:":"Search for a book to edit it, or add a new one.")+'</p>')+res.map(function(b){var s=status(b);
+      return '<div class="arow"><span class="sw2" style="--h:'+b.h+'"></span><div class="grow"><b>'+esc(b.title)+'</b><small>'+esc(b.author||"Author not listed")+' · '+esc(b.call||"no call no.")+' · '+b.copies+(b.copies===1?" copy":" copies")+'</small></div><span class="pill '+(b.withdrawn?"dim":s[0])+'">'+(b.withdrawn?"Withdrawn":s[1])+'</span><button class="btn ghost sm" data-edit="'+b.id+'">Edit</button></div>'}).join("")+(bq&&!res.length?'<div class="empty"><h3>No books match</h3><p>Try fewer words, or add a new book.</p></div>':'')}
+  else{
+    var r2=QS.filter(function(x){return A.qf==="all"||(A.qf==="open"?x.status!=="answered":x.status==="answered")}).sort(function(a,b){return b.createdAt-a.createdAt});
+    $("#qcount").textContent=r2.length+(r2.length===1?" question":" questions");
+    el.innerHTML=r2.length?r2.map(function(x){return '<article class="qcard"><header><div><b>'+esc(x.name)+'</b><small class="muted"> '+esc(x.email)+'</small></div><span class="pill '+(x.status==="answered"?"ok":"low")+'">'+(x.status==="answered"?"Answered":"New")+'</span></header><div><small class="muted">'+esc(x.topic)+' · '+fmtT(x.createdAt)+'</small></div><p class="msg">'+esc(x.message)+'</p>'+(x.status==="answered"?'<div class="reply">'+esc(x.reply)+'<small>Replied by '+esc(x.repliedBy||"")+' · '+fmtT(x.repliedAt)+'</small></div>':'<form class="rform" data-q="'+x.id+'"><label class="sr" for="r'+x.id+'">Reply</label><textarea id="r'+x.id+'" rows="3" placeholder="Write a reply the student will see in My shelf"></textarea><div><button class="btn sm" type="submit">Send reply</button></div></form>')+'</article>'}).join(""):'<div class="empty"><h3>No questions here</h3><p>Questions from students show up here.</p></div>'}}
+function bookForm(){
+  var b=A.edit?BYID[A.edit]:null,v=b||{title:"",author:"",copies:1,isbn:"",media:"Paperback",date:"",shelves:[],call:"",summary:"",withdrawn:false};
+  var shelves=SH.filter(function(n){return n!=="Your library"});
+  $("#aBody").innerHTML='<form class="bform form" id="bookForm" novalidate><h3 style="font-size:26px">'+(b?"Edit book":"Add a book")+'</h3>'+
+   '<div class="fld" id="bfT"><label for="bt">Title</label><input id="bt" value="'+esc(v.title)+'"><div class="err">Enter a title.</div></div>'+
+   '<div class="r2"><div class="fld"><label for="ba">Author</label><input id="ba" value="'+esc(v.author)+'" placeholder="First Last"></div><div class="fld"><label for="bi">ISBN</label><input id="bi" value="'+esc(v.isbn)+'"></div></div>'+
+   '<div class="r2"><div class="fld"><label for="bc">Copies</label><input id="bc" type="number" min="0" value="'+v.copies+'"></div><div class="fld"><label for="by">Year</label><input id="by" value="'+esc(v.date)+'"></div></div>'+
+   '<div class="r2"><div class="fld"><label for="bs">Shelf</label><select id="bs"><option value="">Unsorted</option>'+shelves.map(function(n){return '<option'+(v.shelves[0]===n?" selected":"")+'>'+esc(n)+'</option>'}).join("")+'</select></div><div class="fld"><label for="bm">Format</label><input id="bm" value="'+esc(v.media)+'"></div></div>'+
+   '<div class="fld"><label for="bk">Call number</label><input id="bk" value="'+esc(v.call)+'"></div>'+
+   '<div class="fld"><label for="bu">Summary</label><textarea id="bu">'+esc(v.summary)+'</textarea></div>'+
+   '<label class="chk"><input type="checkbox" id="bw"'+(v.withdrawn?" checked":"")+'> Withdrawn from the shelves (hidden from students)</label>'+
+   '<div class="drow"><button class="btn" type="submit">Save book</button><button class="btn ghost" type="button" data-cancel>Cancel</button></div></form>'}
+$("#aBody").onsubmit=function(e){e.preventDefault();var f=e.target;
+  if(f.id==="bookForm"){
+    var t=$("#bt").value.trim();$("#bfT").classList.toggle("bad",!t);if(!t)return;
+    var fields={title:t,author:$("#ba").value.trim(),isbn:$("#bi").value.trim(),copies:Math.max(0,parseInt($("#bc").value,10)||0),date:$("#by").value.trim(),shelf:$("#bs").value,media:$("#bm").value.trim(),call:$("#bk").value.trim(),summary:$("#bu").value.trim(),withdrawn:$("#bw").checked};
+    var b=A.edit?BYID[A.edit]:null,p=b?(isAdded(b)?BE.saveAdded(b.id,fields):BE.saveBook(b.id,fields)):BE.addBook(fields);
+    p.then(function(rec){if(b)patchBook(b,fields);else{var nb=makeBook(rec);B.push(nb);BYID[nb.id]=nb}recount();buildChips();render();A.edit=undefined;renderAdmin();toast("Book saved")},function(err){toast(errMsg(err))})}
+  else if(f.dataset.q){var id=f.dataset.q,txt=f.querySelector("textarea").value.trim();if(!txt){toast("Write a reply first.");return}
+    BE.answer(id,txt,U).then(function(){toast("Reply sent");return loadAdmin()},function(err){toast(errMsg(err))})}};
+$("#aBody").oninput=function(e){if(e.target.id==="lq"){A.lq=e.target.value;aList()}else if(e.target.id==="bq"){A.bq=e.target.value;aList()}};
+$("#aBody").onchange=function(e){if(e.target.id==="lf"){A.lf=e.target.value;aList()}else if(e.target.id==="qf"){A.qf=e.target.value;aList()}};
+$("#aBody").onclick=function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+  if(d.la)doAct(d.loan,d.la,{checkin:"Checked in.",return:"Marked as returned.",cancel:"Hold cancelled.",extend:"Extended by 7 days."}[d.la]);
+  else if(d.edit){A.edit=d.edit;renderAdmin()}else if("add" in d){A.edit=null;renderAdmin()}else if("cancel" in d){A.edit=undefined;renderAdmin()}};
+$("#aTabs").onclick=function(e){var t=e.target.closest("[data-tab]");if(!t)return;A.tab=t.dataset.tab;A.edit=undefined;renderAdmin()};
+$("#aClose").onclick=closeAdmin;
 
 /* ---------- reveal ---------- */
 (function(){
@@ -682,7 +935,7 @@ $("#cardForm").onsubmit=function(e){e.preventDefault();var n=$("#cname").value.t
 var sObs=new IntersectionObserver(function(en){if(en[0].isIntersecting){countUp();sObs.disconnect()}},{threshold:.3});sObs.observe($("#stats"));
 
 /* init */
-render();tab();drawer();
+render();tab();drawer();renderAuth();startBackend();
 })();
 </script>
 

@@ -11,6 +11,11 @@ for f in sorted(os.listdir(os.path.join(root,'assets'))):
     s=s.replace('assets/'+f,uri)
 data=open(os.path.join(root,'data','catalog.js'),encoding='utf8').read().replace('</','<\\/')
 s=s.replace('<script src="data/catalog.js"></script>','<script>'+data+'</script>')
+for f in ('config.js','js/backend.js'):
+    code=open(os.path.join(root,f),encoding='utf8').read().replace('</','<\\/')
+    tag='<script src="%s"></script>'%f
+    assert tag in s,f
+    s=s.replace(tag,'<script>'+code+'</script>')
 if '--fragment' in sys.argv:
     s=re.sub(r'<!doctype html>\s*','',s,flags=re.I)
     s=re.sub(r'</?(html|head|body)\b[^>]*>','',s)

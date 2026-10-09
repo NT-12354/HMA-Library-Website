@@ -1,0 +1,75 @@
+rules_version = '2';
+
+// Haile-Manas Academy Library. Paste into Firebase console > Firestore Database > Rules.
+// If the school domain is not hmacademy.org, change it in school() below.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function school() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.matches('.*@hmacademy[.]org$');
+    }
+    function isAdmin() {
+      return school()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+    function me() { return request.auth.uid; }
+
+    // Admins are the documents in /admins, named by email. Add them in the Firebase console only.
+    match /admins/{email} {
+      allow get: if school() && request.auth.token.email == email;
+      allow list, write: if false;
+    }
+
+    // Edits and additions made by librarians to the catalog. Anyone can read, only admins write.
+    match /bookEdits/{id} { allow read: if true; allow write: if isAdmin(); }
+    match /newBooks/{id}  { allow read: if true; allow write: if isAdmin(); }
+
+    // One document per loan. Students see only their own. Admins see all.
+    match /loans/{id} {
+      allow read: if school() && (resource.data.uid == me() || isAdmin());
+      allow create: if school()
+        && request.resource.data.uid == me()
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.status == 'requested';
+      allow update: if isAdmin() || (school() && resource.data.uid == me() && (
+        // check in: hold -> borrowed, due within 15 days
+        (resource.data.status == 'requested'
+          && request.resource.data.status == 'borrowed'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'borrowedAt', 'dueAt'])
+          && request.resource.data.dueAt <= request.time.toMillis() + 1296000000)
+        // return: borrowed -> returned
+        || (resource.data.status == 'borrowed'
+          && request.resource.data.status == 'returned'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'returnedAt']))
+        // cancel a hold
+        || (resource.data.status == 'requested'
+          && request.resource.data.status == 'cancelled'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']))
+      ));
+      allow delete: if false;
+    }
+
+    // Anonymous markers that let every student see how many copies are out, without names.
+    match /taken/{id} {
+      allow read: if school();
+      allow create: if school()
+        && request.resource.data.keys().hasOnly(['bookId', 'kind', 'until'])
+        && request.resource.data.kind == 'hold'
+        && getAfter(/databases/$(database)/documents/loans/$(id)).data.uid == me();
+      allow update, delete: if isAdmin()
+        || (school() && get(/databases/$(database)/documents/loans/$(id)).data.uid == me());
+    }
+
+    // Questions to the librarians. Students see their own, admins see all and reply.
+    match /questions/{id} {
+      allow read: if school() && (resource.data.uid == me() || isAdmin());
+      allow create: if school()
+        && request.resource.data.uid == me()
+        && request.resource.data.status == 'open';
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+  }
+}
